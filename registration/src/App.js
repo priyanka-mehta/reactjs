@@ -22,14 +22,14 @@ class App extends Component {
         this.setValue=this.setValue.bind(this);
         this.onClick=this.onClick.bind(this);
     }
-    setValue(key,value,sel){
+    setValue(key,value,select){
         let obj={};
-        if(sel === 1)
+        if(select === 'form1')
         {   obj=this.state.form1;
             obj[key]=value;
             this.setState(obj);
         }
-        if(sel === 2)
+        if(select === 'form2')
         {
             obj=this.state.form2;
             obj[key]=value;
