@@ -14,7 +14,7 @@ class Login extends Component {
             <div>
             <h1>Login</h1>
             
-            <p><input type='text' placeholder='Enter email' onChange={e=>this.setValue(e,'email')}/></p>
+            <p><input type='email' placeholder='Enter email' onChange={e=>this.setValue(e,'email')}/></p>
             <p><input type='password' placeholder='Enter Password'  onChange={e=>this.setValue(e,'password')}/></p>
             <button onClick={e=>this.onClick(e)}>Login</button>
             
