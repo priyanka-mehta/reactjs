@@ -40,7 +40,7 @@
   margin-top: 2%;
   float:left;
   width:30%;
-  height:350px;
+  height:370px;
   border: 3px solid black;
   text-align: center;
   background-image: url('index.jpg');
@@ -50,8 +50,19 @@
   margin-top: 2%;
   float:right;
   width:30%;
-  height:350px;
+  height:370px;
   border: 3px solid black;
   text-align: center;
   background-image: url('index.jpg');
+}
+
+input{
+  height: 40%;
+  width: 60%;
+  font-size: 80%;
+}
+
+button{
+  font-size: 90%;
+  font-family: 'Times New Roman', Times, serif;
 }

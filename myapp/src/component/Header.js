@@ -6,13 +6,13 @@ class Header extends Component {
   render() {
     return (
       <div id="regLog">
-        <div id="col-10">&#9787; Home</div>
-        <div id="col-10">&#22291; About us</div>
-        <div id="col-10">&#9775; Gallery</div>
-        <div id="col-10">&#128214; Blog</div>
-        <div id="col-10">&#9993; Career</div>
-        <div id="col-10">&#9742; Contact us</div>
-        <div id="col-10">&#9997; Register or Login</div>
+        <div id="col-10"><span>&#9787;</span> Home</div>
+        <div id="col-10"><span>&#22291;</span> About us</div>
+        <div id="col-10"><span>&#9775;</span> Gallery</div>
+        <div id="col-10"><span>&#128214;</span> Blog</div>
+        <div id="col-10"><span>&#9993; </span>Career</div>
+        <div id="col-10"><span>&#9742;</span> Contact us</div>
+        <div id="col-10"><span>&#9997;</span> Register or Login</div>
       </div>
       );
     }

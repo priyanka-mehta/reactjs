@@ -1,17 +1,17 @@
 import React, { Component } from 'react';
+import Input from './Input';
 
 class Login extends Component {
-   
-    render(){
 
-        return(
-            <div id='signup'>
-            <h1>Login</h1>
-            <p><input type="email" name="email" placeholder="Enter email" onChange={e=>this.props.setValue(e.target.value,'email','form2')}></input></p>
-            <p><input type="password" name="password" placeholder="Enter Password" onChange={e=>this.props.setValue(e.target.value,'password','form2')}></input> </p>
-            <p><button onClick={e=>this.props.onClick(e)}>Login</button></p>
+    render() {
+        return (
+            <div id='form'>
+                <h1>Login</h1>
+                <p><Input id="email" type="email" name="email" placeholder="Enter Email" onChange={e => this.props.setValue('email', e.target.value, 'form2')} /></p>
+                <p><Input id="password" type="password" name="password" onChange={e => this.props.setValue('password', e.target.value, 'form2')} /> </p>
+                <p><button onClick={e => this.props.onClick(e)}> Login </button></p>
             </div>
-            );
-        }
+        );
     }
-    export default Login;
+}
+export default Login;
