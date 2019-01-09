@@ -14,8 +14,8 @@ class Header extends Component {
         <div id="col-10"><span>&#9742;</span> Contact us</div>
         <div id="col-10"><span>&#9997;</span> Register or Login</div>
       </div>
-      );
-    }
+    );
   }
-  
-  export default Header;
+}
+
+export default Header;

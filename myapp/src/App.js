@@ -7,44 +7,44 @@ import Signup from './component/body/Signup';
 import Login from './component/body/Login';
 
 class App extends Component {
-  constructor(props){
+  constructor(props) {
     super(props);
-    this.state=
-    {
-      username:'',
-      password:'',
-      isSigned:false,
-      email:''
-    };
+    this.state =
+      {
+        username: '',
+        password: '',
+        isSigned: false,
+        email: ''
+      };
   }
-  onChange(user){
+  onChange(user) {
     this.setState(
       {
-        username:user.username,
-        password:user.password,
-        isSigned:user.isSigned
+        username: user.username,
+        password: user.password,
+        isSigned: user.isSigned
       }
+    );
+  }
+  render() {
+    if (this.state.isSigned !== true) {
+      return (
+        <div>
+          <Header />
+          <Signup onChange={this.onChange.bind(this)} />
+          <Footer />
+        </div>
       );
     }
-    render(){
-      if(this.state.isSigned!==true){
-        return(
-          <div>
+    else {
+      return (
+        <div>
           <Header />
-          <Signup onChange={this.onChange.bind(this)}/>
+          <Login data={this.state} />
           <Footer />
-          </div>
-          );
-        }
-        else{
-          return(
-            <div>
-              <Header />
-            <Login data={this.state}/>
-            <Footer />
-            </div>
-            );
-          }
-        }
-      }      
-      export default App;
+        </div>
+      );
+    }
+  }
+}
+export default App;
