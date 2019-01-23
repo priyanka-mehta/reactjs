@@ -46,7 +46,7 @@ class App extends Component {
   render() {
     return (
       <div className="App">
-        <h1> Data transfer between two components</h1>
+        <h1> Data transfer between two component</h1>
         <div id="left">
           <Form1 setValue={this.setValue} onClickAction={this.onClickAction} />
         </div>

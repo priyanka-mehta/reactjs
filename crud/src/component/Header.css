@@ -1,0 +1,15 @@
+.heading{
+    margin-left: 100px;
+    font-size: 25px;
+    margin-top: 0%;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+.subheading{
+    font-family: Arial, Helvetica, sans-serif;
+    margin-left: 100px;
+}
+
+.subhead{
+    color: gray;
+}
