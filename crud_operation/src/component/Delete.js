@@ -30,7 +30,7 @@ class Delete extends Component {
   }
 
   isDelete() {
-    console.log("dele");
+    // console.log("deleted");
     if (window.confirm('Are you sure you wish to delete this user?')) {
       this.deleteRecord();
     } else {
