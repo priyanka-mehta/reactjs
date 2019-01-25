@@ -21,7 +21,6 @@ class App extends Component {
         this.setState({ userList: res.data || [], loading: false });
       });
   }
-
   render() {
     return (
       <div className="App">
