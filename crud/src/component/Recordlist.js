@@ -56,7 +56,7 @@ class Recordlist extends Component {
 
     render() {
         if (this.state.loading) {
-            return (<b className='loading'>Please wait while we are getting user detail...</b>)
+            return (<b className='loading'>Please wait while we are getting user...</b>)
         }
 
         return (
