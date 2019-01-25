@@ -2,34 +2,46 @@ import React, { Component } from 'react';
 import './Adduser.css';
 import Axios from 'axios';
 class Adduser extends Component {
+
   constructor(props) {
+
     super(props);
     this.state = {
       fname: '',
-      lname: ''
-    }
+      lname: '',
+    };
     this.setValue = this.setValue.bind(this);
     this.addData = this.addData.bind(this);
+  
   }
 
   setValue(key, value) {
+
     let obj = {};
     obj = this.state;
     obj[key] = value;
     this.setState(obj);
+  
   }
 
   addData() {
-    Axios.post('https://reqres.in/api/users', { fname: this.state.fname, lname: this.state.lname })
+
+    Axios.post('https://reqres.in/api/users', { first_name: this.state.fname, last_name: this.state.lname })
       .then(function (res) {
+
         console.log("Data Added", res);
+      
       })
       .catch(function (error) {
+
         alert("Oops! Something went wrong.");
+      
       });
+  
   }
 
   render() {
+
     return (
       <div>
         <b className='form'> Add User</b><br /><br />
@@ -42,6 +54,8 @@ class Adduser extends Component {
         </div>
       </div>
     );
+  
   }
+
 }
 export default Adduser;

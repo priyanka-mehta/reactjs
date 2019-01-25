@@ -4,7 +4,9 @@ import axios from 'axios';
 import './Recordlist.css';
 
 class Recordlist extends Component {
+
   constructor(props) {
+
     super(props);
     this.state = {
       userList: [],
@@ -12,51 +14,74 @@ class Recordlist extends Component {
       currentPage: 1,
       pages: [],
       pageChange: false,
-    }
+    };
     this.pageNumber = this.pageNumber.bind(this);
     this.onClick = this.onClick.bind(this);
     this.fetchData = this.fetchData.bind(this);
+  
   }
 
   onClick(e) {
-    this.setState({ currentPage: e.target.value, pageChange: true }, () => { this.fetchData() })
+
+    this.setState({ currentPage: e.target.value, pageChange: true }, () => {
+
+      this.fetchData(); 
+    
+    });
+  
   }
 
   fetchData() {
-    //this.setState({ loading: true });
+
     axios.get(`https://reqres.in/api/users?page=${this.state.currentPage}`)
       .then(res => {
+
         return res;
+      
       })
       .then(res => {
+
         console.log('res :', res);
         this.setState({ userList: res.data.data || [], loading: false, pageChange: false, pages: res.data });
+      
       })
       .catch(function (error) {
+
         alert("Oops! Something went wrong.");
+      
       });
+  
   }
 
 
   pageNumber() {
+
     var page = [];
     for (var i = 1; i <= this.state.pages.total_pages; i++) {
+
       page.push(
         <div style={{ float: 'left', height: 30, width: 30, textAlign: 'center' }}>
           <button className={(Number(this.state.currentPage) === i) ? "btn active" : "btn"} value={i} onClick={(e) => this.onClick(e)}>{i}</button>
         </div>
-      )
+      );
+    
     }
     return (page);
+  
   }
 
   componentDidMount() {
+
     this.setState({ loading: true });
     this.fetchData();
+  
   }
   render() {
+
     if (this.state.loading) {
-      return (<b className='loading'>Please wait ...</b>)
+
+      return (<b className='loading'>Please wait ...</b>);
+    
     }
 
     return (
@@ -90,6 +115,8 @@ class Recordlist extends Component {
         </div>
       </div>
     );
+  
   }
+
 }
 export default Recordlist;
