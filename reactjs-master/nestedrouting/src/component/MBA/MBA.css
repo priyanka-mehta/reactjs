@@ -1,0 +1,22 @@
+#col-10{
+    font-family: 'Times New Roman', Times, serif;
+    border: 2px;
+    font-size: 23px;
+}
+
+.active{
+    color: red;
+}
+
+.content{
+    margin-left:1%;
+    text-align: left;
+    font-family: 'Times New Roman', Times, serif;
+    font-size: 20px;
+    float:left; 
+    width: 55%;
+}
+
+.image{
+   width: 450%;
+}
