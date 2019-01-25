@@ -9,7 +9,6 @@ import Delete from './component/Delete';
 class Routing extends Component {
 
   render() {
-
     return (
       <Router>
         <div>
@@ -24,10 +23,8 @@ class Routing extends Component {
           </div>
         </div>
       </Router>
-    );
-  
+    );  
   }
-
 }
 
 export default Routing;

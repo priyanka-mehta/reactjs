@@ -22,66 +22,46 @@ class Recordlist extends Component {
   }
 
   onClick(e) {
-
     this.setState({ currentPage: e.target.value, pageChange: true }, () => {
-      
       this.fetchData();
-
     });
-
   }
 
   fetchData() {
-
     axios.get(`https://reqres.in/api/users?page=${this.state.currentPage}`)
       .then(res => {
-
         return res;
-
       })
       .then(res => {
-
         console.log('res :', res);
         this.setState({ userList: res.data.data || [], loading: false, pageChange: false, pages: res.data });
-
       })
       .catch(function (error) {
-
         alert("Oops! Something went wrong.");
-
       });
-
   }
 
 
   pageNumber() {
-
     var page = [];
     for (var i = 1; i <= this.state.pages.total_pages; i++) {
-
       page.push(
         <div style={{ float: 'left', height: 50, width: 35, textAlign: 'center' }}>
           <button className={(Number(this.state.currentPage) === i) ? "btn active" : "btn"} value={i} onClick={(e) => this.onClick(e)}>{i}</button>
         </div>
       );
-
     }
     return (page);
-
   }
 
   componentDidMount() {
-
     this.setState({ loading: true });
     this.fetchData();
-
   }
+
   render() {
-
     if (this.state.loading) {
-
       return (<b className='loading'>Please wait ...</b>);
-
     }
 
     return (
@@ -104,7 +84,7 @@ class Recordlist extends Component {
                     <div className="tableData">
                       <NavLink to={`/edit/${i + 1}`} className='link1'>Edit</NavLink>
                       |
-                      <NavLink to={`/delete/${i+1}`} className='link1'>Delete</NavLink>
+                      <NavLink to={`/delete/${i + 1}`} className='link1'>Delete</NavLink>
                     </div>
                   </div>
                 </div>
@@ -117,6 +97,5 @@ class Recordlist extends Component {
     );
 
   }
-
 }
 export default Recordlist;

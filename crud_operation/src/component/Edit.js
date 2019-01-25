@@ -14,63 +14,44 @@ class Edit extends Component {
     this.getData = this.getData.bind(this);
     this.addData = this.addData.bind(this);
     this.setValue = this.setValue.bind(this);
-
   }
+
   componentDidMount() {
-
     this.getData();
-
   }
 
   setValue(key, value) {
-
     let obj = {};
     obj = this.state;
     obj[key] = value;
     this.setState(obj);
-
   }
 
   addData() {
-
     Axios.post(`https://reqres.in/api/users/${this.props.match.params.id}`, { fname: this.state.fname, lname: this.state.lname })
       .then(function (res) {
-
         console.log(res);
-
       })
       .catch(function (error) {
-
         alert("Oops! Something went wrong.");
-
       });
-
   }
 
   getData() {
-
     Axios.get(`https://reqres.in/api/users/${this.props.match.params.id}`)
       .then(res => {
-
         return res;
-
       })
       .then(res => {
-
         console.log('res :', res);
         this.setState({ fname: res.data.data.fname, lname: res.data.data.lname });
-
       })
       .catch(function (error) {
-
         alert("Oops! Something went wrong.");
-
       });
-
   }
 
   render() {
-
     return (
       <div>
         <b className='form'> Edit User</b><br /><br />
@@ -86,12 +67,11 @@ class Edit extends Component {
         </div>
       </div>
     );
-
   }
-
 }
 
 Edit.propTypes = {
   match: PropTypes.object,
 };
+
 export default Edit;
