@@ -1,0 +1,78 @@
+.App {
+  text-align: center;
+}
+
+#left{
+  margin-left: 10%;
+  margin-top: 2%;
+  float:left;
+  width:30%;
+  height:370px;
+  border: 3px solid black;
+  text-align: center;
+  background-image:url("index.jpg");
+}
+#right{
+  margin-right: 10%;
+  margin-top: 2%;
+  float:right;
+  width:30%;
+  height:370px;
+  border: 3px solid black;
+  text-align: center;
+  background-image:url("index.jpg");
+}
+#form{
+  font-family: 'Times New Roman', Times, serif; 
+  font-size: 20px;
+}
+input{
+  height: 40%;
+  width: 60%;
+  font-size: 80%;
+}
+
+button{
+  font-size: 90%;
+  font-family: 'Times New Roman', Times, serif;
+}
+
+.oneline {
+  width: 400px;
+  height: 240px;
+  border: solid 2px #ccc;
+  display: inline-block;
+  margin-right: 25px; 
+  margin-left: 25px;
+  margin-top: 30px;
+  background-image: url('index.jpg');
+  background-repeat: no-repeat;
+  background-size: 400px 300px;
+  font-size: 25px;
+}
+
+#courses{
+  text-align: center;
+  color: blue;
+}
+
+#main{
+  padding: 8%;
+  background-image:url("index.jpg");
+  margin-bottom: 20px;
+  border: solid 2px #ccc;
+  background-repeat: no-repeat;
+  background-size: 1900px 500px;
+}
+
+#col-25{
+  padding: 10%;
+  width: 10%;
+  height: 15%;
+}
+
+.heading{
+  font-family: 'Times New Roman', Times, serif;
+  text-align: center;
+  font-size: 250%;
+}
