@@ -9,7 +9,7 @@ class Adduser extends Component {
             lname: ''
         }
         this.setValue = this.setValue.bind(this);
-        this.onClick = this.onClick.bind(this);
+        this.addData = this.addData.bind(this);
     }
 
     setValue(key, value) {
@@ -19,7 +19,14 @@ class Adduser extends Component {
         this.setState(obj);
     }
 
-    onClick() {
+    addData() {
+        Axios.post('https://reqres.in/api/users',{fname:this.state.fname,lname:this.state.lname})
+        .then(function (res) {
+            console.log("Data Added",res);
+        })
+        .catch(function (error) {
+            alert("Oops! Something went wrong.");
+        });
     }
 
     render() {
@@ -31,7 +38,7 @@ class Adduser extends Component {
                     <p> <input type='text' name='fname' value={this.state.fname} placeholder='Enter First Name' onChange={e => this.setValue('fname', e.target.value)} /></p>
                     <p> Job : </p>
                     <p> <input type='text' name='lname' value={this.state.lname} placeholder='Enter Last Name' onChange={e => this.setValue('lname', e.target.value)} /></p>
-                    <p> <button className='submit' onClick={this.onClick()}>Submit</button><button className='cancel'>Cancel</button></p>
+                    <p> <button className='submit' onClick={this.addData}>Submit</button><button className='cancel'>Cancel</button></p>
                 </div>
             </div>
         );

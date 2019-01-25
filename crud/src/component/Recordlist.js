@@ -46,10 +46,8 @@ class Recordlist extends Component {
         var page = [];
         for (var i = 1; i <= this.state.pages.total_pages; i++) {
             page.push(
-                <div>
-                    <div style={{ float: 'left', height: 30, width: 30, textAlign: 'center' }}>
-                        <button className='btn' value={i} onClick={(e) => this.onClick(e)}>{i}</button>
-                    </div>
+                <div style={{ float: 'left', height: 30, width: 30, textAlign: 'center' }}>
+                    <button className={(Number(this.state.currentPage) === i) ? "btn active" : "btn"} value={i} onClick={(e) => this.onClick(e)}>{i}</button>
                 </div>
             )
         }
@@ -65,8 +63,8 @@ class Recordlist extends Component {
             <div className="App1">
                 <div className='loading'>
                     <div>
-                        <div class="mainTable bottomBorder leftBorder rightBorder ">
-                            <div class="headerData topBorder headingBottom">
+                        <div className="mainTable bottomBorder leftBorder rightBorder ">
+                            <div className="headerData topBorder headingBottom">
                                 <div className="tableData rightBorder"> Firstname </div>
                                 <div className="tableData rightBorder"> Lastname </div>
                                 <div className="tableData rightBorder"> Avtar </div>
@@ -74,12 +72,12 @@ class Recordlist extends Component {
                             </div>
                             {this.state.userList.map((u, i) =>
                                 <div key={i}>
-                                    <div class="topBorder">
+                                    <div className="topBorder">
                                         <div className="tableData rightBorder"> {u.first_name} </div>
                                         <div className="tableData rightBorder"> {u.last_name} </div>
                                         <div className="tableData rightBorder"> <img src={u.avatar} alt="Profile" width="50px" height="50px" /> </div>
                                         <div className="tableData">
-                                            <NavLink to='/edit' className='link1'>Edit</NavLink>
+                                            <NavLink to={`/edit/${i+1}`} className='link1'>Edit</NavLink>
                                             |
                                             <NavLink to='/delete' className='link1'>Delete</NavLink>
                                         </div>

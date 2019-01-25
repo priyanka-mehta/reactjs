@@ -3,6 +3,7 @@ import { Route, Switch, BrowserRouter as Router } from 'react-router-dom';
 import Header from './component/Header';
 import Adduser from './component/Adduser';
 import Recordlist from './component/Recordlist';
+import Edit from './component/Edit';
 
 class Routing extends Component {
     render() {
@@ -14,6 +15,7 @@ class Routing extends Component {
                         <Switch>
                             <Route exact path="/" component={Recordlist} />
                             <Route exact path='/add' component={Adduser} />
+                            <Route exact path='/edit/:id' component={Edit}/>
                         </Switch>
                     </div>
                 </div>
