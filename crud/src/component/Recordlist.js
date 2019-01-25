@@ -37,10 +37,6 @@ class Recordlist extends Component {
             });
     }
 
-    componentDidMount() {
-        this.setState({ loading: true });
-        this.fetchData();
-    }
 
     pageNumber() {
         var page = [];
@@ -54,9 +50,13 @@ class Recordlist extends Component {
         return (page);
     }
 
+    componentDidMount() {
+        this.setState({ loading: true });
+        this.fetchData();
+    }
     render() {
         if (this.state.loading) {
-            return (<b className='loading'>Please wait while we are getting user...</b>)
+            return (<b className='loading'>Please wait ...</b>)
         }
 
         return (
