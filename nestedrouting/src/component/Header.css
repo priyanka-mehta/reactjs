@@ -1,0 +1,30 @@
+#regLog{
+    background: lightblue;
+    text-align: right;
+}
+
+#col-10{
+    padding: 1%;
+    display: inline-block; 
+    color: black;
+    font-size: 23px;  
+    font-family: 'Times New Roman', Times, serif;
+}
+
+#logo{
+    padding: 1%;
+    display: inline-block;
+    color: white;
+    font-size: 23px;
+}
+
+#logo{
+    margin-left: 1%;
+    float:left;
+  }
+
+img{
+    width: 8%;
+    margin-left: 1%;
+    float:left;
+  }
