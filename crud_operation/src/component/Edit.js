@@ -5,7 +5,6 @@ import PropTypes from 'prop-types';
 class Edit extends Component {
 
   constructor(props) {
-
     super(props);
     this.state = {
       fname: '',
@@ -44,7 +43,8 @@ class Edit extends Component {
       })
       .then(res => {
         console.log('res :', res);
-        this.setState({ fname: res.data.data.fname, lname: res.data.data.lname });
+        this.setState({ fname: res.data.data.first_name, lname: res.data.data.last_name });
+        console.log(this.state);
       })
       .catch(function (error) {
         alert("Oops! Something went wrong.");
