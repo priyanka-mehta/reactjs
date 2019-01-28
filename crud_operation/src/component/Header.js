@@ -13,7 +13,7 @@ class Header extends Component {
         </p>
         <p className='subheading'>
           <NavLink exact to='/' className='link'>Record List</NavLink>
-          &nbsp;|&nbsp;
+          |
           <span>
             <NavLink exact to='/list/new' className='link'>Add Record</NavLink>
           </span>
