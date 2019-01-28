@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import './Adduser.css';
+import { Redirect } from 'react-router-dom';
 import Axios from 'axios';
 class Adduser extends Component {
 
@@ -39,7 +40,7 @@ class Adduser extends Component {
           <p> <input type='text' name='fname' value={this.state.fname} placeholder='Enter First Name' onChange={e => this.setValue('fname', e.target.value)} /></p>
           <p> Job : </p>
           <p> <input type='text' name='lname' value={this.state.lname} placeholder='Enter Last Name' onChange={e => this.setValue('lname', e.target.value)} /></p>
-          <p> <button className='submit' onClick={this.addData}>Submit</button><button className='cancel'>Cancel</button></p>
+          <p> <button className='submit' onClick={this.addData}>Submit</button><button className='cancel' onClick={<Redirect to='/'/>} >cancel</button></p>
         </div>
       </div>
     );

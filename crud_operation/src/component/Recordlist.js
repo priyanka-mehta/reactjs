@@ -41,12 +41,11 @@ class Recordlist extends Component {
       });
   }
 
-
   pageNumber() {
     var page = [];
     for (var i = 1; i <= this.state.pages.total_pages; i++) {
       page.push(
-        <div style={{ float: 'left', height: 50, width: 35, textAlign: 'center' }}>
+        <div>
           <button className={(Number(this.state.currentPage) === i) ? "btn active" : "btn"} value={i} onClick={(e) => this.onClick(e)}>{i}</button>
         </div>
       );
@@ -80,7 +79,7 @@ class Recordlist extends Component {
                   <div className="topBorder">
                     <div className="tableData rightBorder"> {u.first_name} </div>
                     <div className="tableData rightBorder"> {u.last_name} </div>
-                    <div className="tableData rightBorder"> <img src={u.avatar} alt="Profile" width="50px" height="50px" /> </div>
+                    <div className="tableData rightBorder"> <img src={u.avatar} alt="Profile" className='image' /> </div>
                     <div className="tableData">
                       <NavLink to={`/edit/${i + 1}`} className='link1'>Edit</NavLink>
                       |
@@ -95,7 +94,6 @@ class Recordlist extends Component {
         </div>
       </div>
     );
-
   }
 }
 export default Recordlist;
