@@ -6,7 +6,6 @@ import './Recordlist.css';
 class Recordlist extends Component {
 
   constructor(props) {
-
     super(props);
     this.state = {
       userList: [],
@@ -45,7 +44,7 @@ class Recordlist extends Component {
     var page = [];
     for (var i = 1; i <= this.state.pages.total_pages; i++) {
       page.push(
-        <div>
+        <div className='page'>
           <button className={(Number(this.state.currentPage) === i) ? "btn active" : "btn"} value={i} onClick={(e) => this.onClick(e)}>{i}</button>
         </div>
       );

@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import './Adduser.css';
-import { Redirect } from 'react-router-dom';
 import Axios from 'axios';
 class Adduser extends Component {
 
@@ -9,6 +8,7 @@ class Adduser extends Component {
     this.state = {
       fname: '',
       lname: '',
+      wait: false,
     };
     this.setValue = this.setValue.bind(this);
     this.addData = this.addData.bind(this);
@@ -22,9 +22,13 @@ class Adduser extends Component {
   }
 
   addData() {
+    this.setState({wait : true});
     Axios.post('https://reqres.in/api/users', { fname: this.state.fname, lname: this.state.lname })
       .then(function (res) {
         console.log("Data Added", res);
+      })
+      .then(() => {
+        this.setState({wait : false});
       })
       .catch(function (error) {
         alert("Oops! Something went wrong.");
@@ -40,7 +44,7 @@ class Adduser extends Component {
           <p> <input type='text' name='fname' value={this.state.fname} placeholder='Enter First Name' onChange={e => this.setValue('fname', e.target.value)} /></p>
           <p> Job : </p>
           <p> <input type='text' name='lname' value={this.state.lname} placeholder='Enter Last Name' onChange={e => this.setValue('lname', e.target.value)} /></p>
-          <p> <button className='submit' onClick={this.addData}>Submit</button><button className='cancel' onClick={<Redirect to='/'/>} >cancel</button></p>
+          <p> <button className='submit' onClick={this.addData}>{this.state.wait ? 'Please wait...' : 'Submit'}</button><button className='cancel'>cancel</button></p>
         </div>
       </div>
     );
