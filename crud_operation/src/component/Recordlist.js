@@ -1,7 +1,13 @@
 import React, { Component } from 'react';
+
 import { NavLink } from 'react-router-dom';
-import axios from 'axios';
-import './Recordlist.css';
+import PropTypes from 'prop-types';
+import history from '../history';
+
+import { fetchData } from './Api';
+import { deleteRecord } from './Api';
+
+import './../CssFiles/Recordlist.css';
 
 class Recordlist extends Component {
 
@@ -17,7 +23,8 @@ class Recordlist extends Component {
     this.pageNumber = this.pageNumber.bind(this);
     this.onClick = this.onClick.bind(this);
     this.fetchData = this.fetchData.bind(this);
-
+    this.deleteRecord = this.deleteRecord.bind(this);
+    this.isDelete = this.isDelete.bind(this);
   }
 
   onClick(e) {
@@ -26,17 +33,22 @@ class Recordlist extends Component {
     });
   }
 
+  componentDidMount() {
+    this.setState({ loading: true });
+    this.fetchData();
+  }
+
   fetchData() {
-    axios.get(`https://reqres.in/api/users?page=${this.state.currentPage}`)
+    fetchData(this.state.currentPage)
       .then(res => {
-        return res;
-      })
-      .then(res => {
-        console.log('res :', res);
-        this.setState({ userList: res.data.data || [], loading: false, pageChange: false, pages: res.data });
-      })
-      .catch(function (error) {
-        alert("Oops! Something went wrong.");
+        this.setState(
+          {
+            userList: res.data.data || null,
+            loading: false,
+            pageChange: false,
+            pages: res.data,
+          }
+        );
       });
   }
 
@@ -44,22 +56,35 @@ class Recordlist extends Component {
     var page = [];
     for (var i = 1; i <= this.state.pages.total_pages; i++) {
       page.push(
-        <div className='page'>
-          <button className={(Number(this.state.currentPage) === i) ? "btn active" : "btn"} value={i} onClick={(e) => this.onClick(e)}>{i}</button>
+        <div style={{ float: 'left', height: 50, width: 35, textAlign: 'center' }}>
+          <button disabled={Number(this.state.currentPage) === i} className={(Number(this.state.currentPage) === i) ? "btn active" : "btn"} value={i} onClick={(e) => this.onClick(e)}>{i}</button>
         </div>
       );
     }
     return (page);
   }
 
-  componentDidMount() {
-    this.setState({ loading: true });
-    this.fetchData();
+  isDelete() {
+    if (window.confirm('Are you sure you want to delete this user?')) {
+      this.deleteRecord();
+    } else {
+      this.setState({ cancel: true });
+    }
+  }
+
+  deleteRecord() {
+    deleteRecord(this.props.match.params.id)
+      .then((res) => {
+        console.log('User deleted : ', res);
+        this.setState({ delete: true });
+        history.push('/');
+      });
   }
 
   render() {
-    if (this.state.loading) {
-      return (<b className='loading'>Please wait ...</b>);
+    const { loading, userList, pageChange } = this.state;
+    if (loading) {
+      return (<b className='loading'>Please wait while we are getting user details...</b>);
     }
 
     return (
@@ -73,26 +98,30 @@ class Recordlist extends Component {
                 <div className="tableData rightBorder"> Avtar </div>
                 <div className="tableData"> Action </div>
               </div>
-              {this.state.userList.map((u, i) =>
+              {userList.map((u, i) =>
                 <div key={i}>
                   <div className="topBorder">
                     <div className="tableData rightBorder"> {u.first_name} </div>
                     <div className="tableData rightBorder"> {u.last_name} </div>
                     <div className="tableData rightBorder"> <img src={u.avatar} alt="Profile" className='image' /> </div>
                     <div className="tableData">
-                      <NavLink to={`/edit/${i + 1}`} className='link1'>Edit</NavLink>
+                      <NavLink to={`/user/${i + 1}`} className='link1'>Edit</NavLink>
                       |
-                      <NavLink to={`/delete/${i + 1}`} className='link1'>Delete</NavLink>
+                      <NavLink to={`/delete/${i + 1}`} onClick={this.isDelete} className='link1'>Delete</NavLink>
                     </div>
                   </div>
                 </div>
               )}
             </div>
-            {this.pageNumber()}{this.state.pageChange ? <p>Fetching Data...</p> : null}
+            {this.pageNumber()}{pageChange ? <p>Fetching Data...</p> : null}
           </div>
         </div>
       </div>
     );
   }
 }
+
+Recordlist.propTypes = {
+  match: PropTypes.object,
+};
 export default Recordlist;

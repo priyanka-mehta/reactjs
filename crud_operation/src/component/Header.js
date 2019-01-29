@@ -1,11 +1,11 @@
 import React, { Component } from 'react';
 import { NavLink } from 'react-router-dom';
-import './Header.css';
+
+import './../CssFiles/Header.css';
 
 class Header extends Component {
 
   render() {
-
     return (
       <div>
         <p className='heading'>
@@ -15,7 +15,7 @@ class Header extends Component {
           <NavLink exact to='/' className='link'>Record List</NavLink>
           |
           <span>
-            <NavLink exact to='/list/new' className='link'>Add Record</NavLink>
+            <NavLink exact to='/add' className='link'>Add Record</NavLink>
           </span>
         </p>
       </div>

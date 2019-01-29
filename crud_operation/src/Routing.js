@@ -1,29 +1,30 @@
 import React, { Component } from 'react';
-import { Route, Switch, BrowserRouter as Router } from 'react-router-dom';
+import { Route, Switch, Router } from 'react-router-dom';
+import history from './history';
+
 import Header from './component/Header';
 import Adduser from './component/Adduser';
 import Recordlist from './component/Recordlist';
 import Edit from './component/Edit';
-import Delete from './component/Delete';
 
 class Routing extends Component {
 
   render() {
     return (
-      <Router>
+      <Router history={history}>
         <div>
           <Header />
           <div>
             <Switch>
               <Route exact path="/" component={Recordlist} />
-              <Route exact path='/list/new' component={Adduser} />
-              <Route exact path='/edit/:id' component={Edit} />
-              <Route exact path='/delete/:id' component={Delete} />
+              <Route exact path='/add' component={Adduser} />
+              <Route exact path='/user/:id' component={Edit} />
+              <Route exact path='/delete/:id' component={Recordlist} />
             </Switch>
           </div>
         </div>
       </Router>
-    );  
+    );
   }
 }
 
