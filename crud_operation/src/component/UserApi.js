@@ -20,7 +20,7 @@ export const getData = (id) => {
   return (
     axios.get(`https://reqres.in/api/users/${id}`)
       .then(res => {
-        console.log("Data fetching", res.data.data);
+        console.log("Data fetching", res);
         return res;
       })
       .catch(function (error) {

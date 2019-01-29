@@ -3,9 +3,8 @@ import { Route, Switch, Router } from 'react-router-dom';
 import history from './history';
 
 import Header from './component/Header';
-import Adduser from './component/Adduser';
+import Addedit from './component/Addedit';
 import Recordlist from './component/Recordlist';
-import Edit from './component/Edit';
 
 class Routing extends Component {
 
@@ -17,8 +16,8 @@ class Routing extends Component {
           <div>
             <Switch>
               <Route exact path="/" component={Recordlist} />
-              <Route exact path='/add' component={Adduser} />
-              <Route exact path='/user/:id' component={Edit} />
+              <Route exact path='/add' render={(props)=> <Addedit {...props} key="Addedit" />}/>
+              <Route exact path='/user/:id' component={Addedit} />
               <Route exact path='/delete/:id' component={Recordlist} />
             </Switch>
           </div>

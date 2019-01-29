@@ -1,16 +1,15 @@
 import React, { Component } from 'react';
-
-import { NavLink } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import history from '../history';
 
-import { fetchData } from './Api';
-import { deleteRecord } from './Api';
+import { NavLink } from 'react-router-dom';
+
+import { fetchData } from './UserApi';
+import { deleteRecord } from './UserApi';
 
 import './../CssFiles/Recordlist.css';
 
 class Recordlist extends Component {
-
   constructor(props) {
     super(props);
     this.state = {
@@ -41,14 +40,16 @@ class Recordlist extends Component {
   fetchData() {
     fetchData(this.state.currentPage)
       .then(res => {
-        this.setState(
-          {
-            userList: res.data.data || null,
-            loading: false,
-            pageChange: false,
-            pages: res.data,
-          }
-        );
+        if (res.data || res.data.data || res.data.data.data) {
+          this.setState(
+            {
+              userList: res.data.data || null,
+              loading: false,
+              pageChange: false,
+              pages: res.data,
+            }
+          );
+        }
       });
   }
 
@@ -57,7 +58,7 @@ class Recordlist extends Component {
     for (var i = 1; i <= this.state.pages.total_pages; i++) {
       page.push(
         <div style={{ float: 'left', height: 50, width: 35, textAlign: 'center' }}>
-          <button disabled={Number(this.state.currentPage) === i} className={(Number(this.state.currentPage) === i) ? "btn active" : "btn"} value={i} onClick={(e) => this.onClick(e)}>{i}</button>
+          <button disabled={Number(this.state.pages.page) === i} className={(Number(this.state.pages.page) === i) ? "btn active" : "btn"} value={i} onClick={(e) => this.onClick(e)}>{i}</button>
         </div>
       );
     }

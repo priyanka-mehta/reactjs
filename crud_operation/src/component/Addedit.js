@@ -6,23 +6,22 @@ import { getData } from './UserApi';
 
 import history from '../history';
 
-class Edit extends Component {
+import './../CssFiles/Addedit.css';
+
+class Addedit extends Component {
+
   constructor(props) {
     super(props);
     this.state = {
       fname: '',
       lname: '',
-      avatar: '',
       loading: false,
+      avatar: '',
     };
-    this.getData = this.getData.bind(this);
-    this.addData = this.addData.bind(this);
     this.setValue = this.setValue.bind(this);
+    this.addData = this.addData.bind(this);
     this.cancel = this.cancel.bind(this);
-  }
-
-  componentDidMount() {
-    this.getData();
+    this.getData = this.getData.bind(this);
   }
 
   setValue(e) {
@@ -35,6 +34,15 @@ class Edit extends Component {
     this.setState({ loading: false });
   }
 
+  cancel() {
+    history.push('/');
+  }
+
+  componentDidMount() {
+    if (this.props.match.path === '/user/:id') {
+      this.getData();
+    }
+  }
   getData() {
     getData(this.props.match.params.id)
       .then(res => {
@@ -51,15 +59,11 @@ class Edit extends Component {
       });
   }
 
-  cancel() {
-    history.push('/');
-  }
-
   render() {
     const { fname, lname, avatar, loading } = this.state;
     return (
       <div>
-        <b className='form'> Edit User</b>
+        <b className='form'> Add User</b>
         <div className='form'>
           <p> Name : </p>
           <p>
@@ -81,22 +85,25 @@ class Edit extends Component {
               onChange={e => this.setValue(e)}
             />
           </p>
-          <p>Avatar : </p>
+          <div hidden={this.props.match.path === '/add'}>
+            <p >Avatar : </p>
+            <p>
+              <img src={avatar} alt="Profile" width="90px" height="90px" />
+            </p>
+          </div>
           <p>
-            <img src={avatar} alt="Profile" width="90px" height="90px" />
-          </p>
-          <p>
-            <button className='submit' onClick={this.addData}> {loading ? 'Please wait...' : 'Edit'}</button>
-            <button className='cancel' onClick={this.cancel}>Cancel</button>
-          </p>
+            <button className='submit' onClick={this.addData}>
+              {loading ? 'Please wait...' : 'Submit'}
+            </button>
+            <button className='cancel' onClick={this.cancel}>cancel</button></p>
         </div>
-      </div>
+      </div >
     );
+
   }
 }
 
-Edit.propTypes = {
+Addedit.propTypes = {
   match: PropTypes.object,
 };
-
-export default Edit;
+export default Addedit;
