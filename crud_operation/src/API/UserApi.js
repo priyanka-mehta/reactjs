@@ -29,6 +29,8 @@ export const getData = (id) => {
   );
 };
 
+// export const ;
+
 export const fetchData = (id) => {
   return (
     axios.get(`https://reqres.in/api/users?page=${id}`)

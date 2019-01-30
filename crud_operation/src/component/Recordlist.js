@@ -3,9 +3,8 @@ import PropTypes from 'prop-types';
 import history from '../history';
 
 import { NavLink } from 'react-router-dom';
-
-import { fetchData } from './UserApi';
-import { deleteRecord } from './UserApi';
+import { fetchData } from './../API/UserApi';
+import { deleteRecord } from '../API/UserApi';
 
 import './../CssFiles/Recordlist.css';
 

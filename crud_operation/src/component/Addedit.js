@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 
-import { addData } from './UserApi';
-import { getData } from './UserApi';
+import { addData } from './../API/UserApi';
+import { getData } from './../API/UserApi';
 
 import history from '../history';
 
@@ -33,7 +33,7 @@ class Addedit extends Component {
     addData(this.state.fname, this.state.lname);
     this.setState({ loading: false });
   }
-
+  
   cancel() {
     history.push('/');
   }
@@ -63,7 +63,7 @@ class Addedit extends Component {
     const { fname, lname, avatar, loading } = this.state;
     return (
       <div>
-        <b className='form'> Add User</b>
+        {this.props.match.path === '/add' ? <b className='form'>Add user</b> :<b className='form'> Edit user</b>}
         <div className='form'>
           <p> Name : </p>
           <p>
@@ -99,7 +99,6 @@ class Addedit extends Component {
         </div>
       </div >
     );
-
   }
 }
 

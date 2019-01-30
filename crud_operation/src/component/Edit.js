@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 
-import { addData } from './UserApi';
-import { getData } from './UserApi';
+import { addData } from '../API/UserApi';
+import { getData } from '../API/UserApi';
 
 import history from '../history';
 
