@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 
 import { addData } from '../API/UserApi';
-import { getData } from '../API/UserApi';
+import { getUser } from '../API/UserApi';
 
 import history from '../history';
 
@@ -15,14 +15,14 @@ class Edit extends Component {
       avatar: '',
       loading: false,
     };
-    this.getData = this.getData.bind(this);
+    this.getUser = this.getUser.bind(this);
     this.addData = this.addData.bind(this);
     this.setValue = this.setValue.bind(this);
     this.cancel = this.cancel.bind(this);
   }
 
   componentDidMount() {
-    this.getData();
+    this.getUser();
   }
 
   setValue(e) {
@@ -35,8 +35,8 @@ class Edit extends Component {
     this.setState({ loading: false });
   }
 
-  getData() {
-    getData(this.props.match.params.id)
+  getUser() {
+    getUser(this.props.match.params.id)
       .then(res => {
         if (res.data || res.data.data || res.data.data.data) {
           this.setState(

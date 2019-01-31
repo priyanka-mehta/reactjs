@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import history from '../history';
 
 import { NavLink } from 'react-router-dom';
-import { fetchData } from './../API/UserApi';
+import { fetchUserList } from './../API/UserApi';
 import { deleteRecord } from '../API/UserApi';
 
 import './../CssFiles/Recordlist.css';
@@ -20,25 +20,26 @@ class Recordlist extends Component {
     };
     this.pageNumber = this.pageNumber.bind(this);
     this.onClick = this.onClick.bind(this);
-    this.fetchData = this.fetchData.bind(this);
+    this.fetchUserList = this.fetchUserList.bind(this);
     this.deleteRecord = this.deleteRecord.bind(this);
     this.isDelete = this.isDelete.bind(this);
   }
 
   onClick(e) {
     this.setState({ currentPage: e.target.value, pageChange: true }, () => {
-      this.fetchData();
+      this.fetchUserList();
     });
   }
 
-  componentDidMount() {
+  componentDidMount() { 
     this.setState({ loading: true });
-    this.fetchData();
+    this.fetchUserList();
   }
 
-  fetchData() {
-    fetchData(this.state.currentPage)
+  fetchUserList() {  
+    fetchUserList(this.state.currentPage)
       .then(res => {
+        console.log("response is :  ",res);       
         if (res.data || res.data.data || res.data.data.data) {
           this.setState(
             {
