@@ -75,7 +75,7 @@ class Addedit extends Component {
   render() {
     const { fname, lname, avatar, loading } = this.state;
     return (
-      <div>
+      <>
         {this.props.match.path === '/add' ? <b className='form'>Add user</b> : <b className='form'> Edit user</b>}
         <div className='form'>
           <p> Name : </p>
@@ -119,7 +119,7 @@ class Addedit extends Component {
             </p>
           </div>
         </div >
-      </div>
+      </>
     );
   }
 }

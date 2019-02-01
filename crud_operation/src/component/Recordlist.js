@@ -13,7 +13,6 @@ class Recordlist extends Component {
     super(props);
     this.state = {
       pages: [],
-      userList: [],
       currentPage: 1,
       loading: true,
       pageChange: false,
@@ -41,7 +40,6 @@ class Recordlist extends Component {
         if (res.data || res.data.data || res.data.data.data) {
           this.setState(
             {
-              userList: res.data.data || null,
               loading: false,
               pageChange: false,
               pages: res.data,
@@ -89,13 +87,13 @@ class Recordlist extends Component {
   }
 
   render() {
-    const { loading, userList, pageChange } = this.state;
+    const { loading, pageChange, pages } = this.state;
     if (loading) {
       return (<b className='loading'>Please wait while we are getting user details...</b>);
     }
 
     return (
-      <div className="App1">
+      <>
         <div className='loading'>
           <div className="mainTable bottomBorder leftBorder rightBorder ">
             <div className="headerData topBorder headingBottom">
@@ -104,7 +102,7 @@ class Recordlist extends Component {
               <div className="tableData rightBorder"> Avtar </div>
               <div className="tableData"> Action </div>
             </div>
-            {userList.map((u, i) =>
+            {pages.data.map((u, i) =>
               <div key={i}>
                 <div className="topBorder">
                   <div className="tableData rightBorder"> {u.first_name} </div>
@@ -121,7 +119,7 @@ class Recordlist extends Component {
           </div>
           {this.pageNumber()}{pageChange ? <p>Fetching Data...</p> : null}
         </div>
-      </div>
+      </>
     );
   }
 }

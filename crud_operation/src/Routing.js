@@ -11,18 +11,16 @@ class Routing extends Component {
   render() {
     return (
       <Router history={history}>
-        <div>
+        <React.Fragment>
           <Header />
-          <div>
-            <Switch>
-              <Route exact path="/" component={Recordlist} />
-              <Route exact path='/add' render={(props)=> <Addedit {...props} key="Addedit" />}/>
-              <Route exact path='/user/:id' component={Addedit} />
-              <Route exact path='/delete/:id' component={Recordlist} />
-            </Switch>
-          </div>
-        </div>
-      </Router>
+          <Switch>
+            <Route exact path="/" component={Recordlist} />
+            <Route exact path='/add' render={(props) => <Addedit {...props} key="Addedit" />} />
+            <Route exact path='/user/:id' component={Addedit} />
+            <Route exact path='/delete/:id' component={Recordlist} />
+          </Switch>
+        </React.Fragment>
+      </Router >
     );
   }
 }
