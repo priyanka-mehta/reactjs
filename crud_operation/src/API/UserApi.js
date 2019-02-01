@@ -10,9 +10,9 @@ export const getUser = (id) => {
   return interceptor.get(apiurl);
 };
 
-export const deleteRecord = (id) => {
-  const apiurl = `users/${id}`;
-  return interceptor.deleteRecord(apiurl);
+export const addUser = (fname, lname) => {
+  const apiurl = `users`;
+  return interceptor.post(apiurl, fname, lname);
 };
 
 export const editUser = (fname, lname, id) => {
@@ -20,7 +20,7 @@ export const editUser = (fname, lname, id) => {
   return interceptor.put(apiurl, fname, lname);
 };
 
-export const addUser = (fname, lname) => {
-  const apiurl = `users`;
-  return interceptor.post(apiurl, fname, lname);
+export const deleteRecord = (id) => {
+  const apiurl = `users/${id}`;
+  return interceptor.deleteRecord(apiurl);
 };

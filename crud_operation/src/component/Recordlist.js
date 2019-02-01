@@ -12,10 +12,10 @@ class Recordlist extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      userList: [],
-      loading: false,
-      currentPage: 1,
       pages: [],
+      userList: [],
+      currentPage: 1,
+      loading: true,
       pageChange: false,
     };
     this.pageNumber = this.pageNumber.bind(this);
@@ -32,7 +32,6 @@ class Recordlist extends Component {
   }
 
   componentDidMount() {
-    this.setState({ loading: true });
     this.fetchUserList();
   }
 
@@ -53,15 +52,13 @@ class Recordlist extends Component {
   }
 
   pageNumber() {
-    return Array(this.state.pages.total_pages).fill(0).map((btn, i) =>
-      <button value={i + 1}
-        key={`btn${i + 1}`}
-        className={(Number(this.state.pages.page) === i + 1) ? "btn active" : "btn"}
-        disabled={(Number(this.state.pages.page) === i + 1) ? true : false}
-        onClick={(e) => this.onClick(e)}> {i + 1}</button >
+    return Array(this.state.pages.total_pages).fill().map((btn, i) =>
+      <div key={`btn${i + 1}`} style={{ float: 'left', height: 50, width: 35, textAlign: 'center' }}>
+        <button value={i + 1} className={(Number(this.state.pages.page) === i + 1) ? "btn active" : "btn"}
+          disabled={Number(this.state.pages.page) === i + 1}
+          onClick={(e) => this.onClick(e)}> {i + 1}</button ></div>
     );
   }
-
   // pageNumber() {
   //   var page = [];
   //   for (var i = 1; i <= this.state.pages.total_pages; i++) {
@@ -100,31 +97,29 @@ class Recordlist extends Component {
     return (
       <div className="App1">
         <div className='loading'>
-          <div>
-            <div className="mainTable bottomBorder leftBorder rightBorder ">
-              <div className="headerData topBorder headingBottom">
-                <div className="tableData rightBorder"> Firstname </div>
-                <div className="tableData rightBorder"> Lastname </div>
-                <div className="tableData rightBorder"> Avtar </div>
-                <div className="tableData"> Action </div>
-              </div>
-              {userList.map((u, i) =>
-                <div key={i}>
-                  <div className="topBorder">
-                    <div className="tableData rightBorder"> {u.first_name} </div>
-                    <div className="tableData rightBorder"> {u.last_name} </div>
-                    <div className="tableData rightBorder"> <img src={u.avatar} alt="Profile" className='image' /> </div>
-                    <div className="tableData">
-                      <NavLink to={`/user/${i + 1}`} className='link1'>Edit</NavLink>
-                      |
-                      <NavLink to={`/delete/${i + 1}`} onClick={this.isDelete} className='link1'>Delete</NavLink>
-                    </div>
+          <div className="mainTable bottomBorder leftBorder rightBorder ">
+            <div className="headerData topBorder headingBottom">
+              <div className="tableData rightBorder"> Firstname </div>
+              <div className="tableData rightBorder"> Lastname </div>
+              <div className="tableData rightBorder"> Avtar </div>
+              <div className="tableData"> Action </div>
+            </div>
+            {userList.map((u, i) =>
+              <div key={i}>
+                <div className="topBorder">
+                  <div className="tableData rightBorder"> {u.first_name} </div>
+                  <div className="tableData rightBorder"> {u.last_name} </div>
+                  <div className="tableData rightBorder"> <img src={u.avatar} alt="Profile" className='image' /> </div>
+                  <div className="tableData">
+                    <NavLink to={`/user/${i + 1}`} className='link1'>Edit</NavLink>
+                    |
+                    <NavLink to={`/delete/${i + 1}`} onClick={this.isDelete} className='link1'>Delete</NavLink>
                   </div>
                 </div>
-              )}
-            </div>
-            {this.pageNumber()}{pageChange ? <p>Fetching Data...</p> : null}
+              </div>
+            )}
           </div>
+          {this.pageNumber()}{pageChange ? <p>Fetching Data...</p> : null}
         </div>
       </div>
     );

@@ -7,8 +7,8 @@ export const get = (apiurl) => {
   console.log("Full url", fullUrl);
   return (
     axios.get(fullUrl)
-      .then(res => {
-        console.log(res);
+      .then(function (res) {
+        console.log("Data is: ", res.data);
         return res;
       })
       .catch(function (error) {
@@ -56,7 +56,7 @@ export const deleteRecord = (apiurl) => {
   let fullUrl = `${baseUrl}${apiurl}`;
   return (
     axios.delete(fullUrl)
-      .then(res => {
+      .then(function (res) {
         return res;
       })
       .catch(function (error) {
