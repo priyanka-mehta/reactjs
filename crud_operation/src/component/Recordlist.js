@@ -31,15 +31,14 @@ class Recordlist extends Component {
     });
   }
 
-  componentDidMount() { 
+  componentDidMount() {
     this.setState({ loading: true });
     this.fetchUserList();
   }
 
-  fetchUserList() {  
+  fetchUserList() {
     fetchUserList(this.state.currentPage)
       .then(res => {
-        console.log("response is :  ",res);       
         if (res.data || res.data.data || res.data.data.data) {
           this.setState(
             {
@@ -54,16 +53,26 @@ class Recordlist extends Component {
   }
 
   pageNumber() {
-    var page = [];
-    for (var i = 1; i <= this.state.pages.total_pages; i++) {
-      page.push(
-        <div style={{ float: 'left', height: 50, width: 35, textAlign: 'center' }}>
-          <button disabled={Number(this.state.pages.page) === i} className={(Number(this.state.pages.page) === i) ? "btn active" : "btn"} value={i} onClick={(e) => this.onClick(e)}>{i}</button>
-        </div>
-      );
-    }
-    return (page);
+    return Array(this.state.pages.total_pages).fill(0).map((btn, i) =>
+      <button value={i + 1}
+        key={`btn${i + 1}`}
+        className={(Number(this.state.pages.page) === i + 1) ? "btn active" : "btn"}
+        disabled={(Number(this.state.pages.page) === i + 1) ? true : false}
+        onClick={(e) => this.onClick(e)}> {i + 1}</button >
+    );
   }
+
+  // pageNumber() {
+  //   var page = [];
+  //   for (var i = 1; i <= this.state.pages.total_pages; i++) {
+  //     page.push(
+  //       <div style={{ float: 'left', height: 50, width: 35, textAlign: 'center' }}>
+  //         <button disabled={Number(this.state.pages.page) === i} className={(Number(this.state.pages.page) === i) ? "btn active" : "btn"} value={i} onClick={(e) => this.onClick(e)}>{i}</button>
+  //       </div>
+  //     );
+  //   }
+  //   return (page);
+  // }
 
   isDelete() {
     if (window.confirm('Are you sure you want to delete this user?')) {

@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 
 import { addUser } from './../API/UserApi';
 import { getUser } from './../API/UserApi';
+import { editUser } from './../API/UserApi';
 
 import history from '../history';
 
@@ -22,30 +23,7 @@ class Addedit extends Component {
     this.addUser = this.addUser.bind(this);
     this.cancel = this.cancel.bind(this);
     this.getUser = this.getUser.bind(this);
-  }
-
-  setValue(e) {
-    this.setState({ [e.target.name]: e.target.value });
-  }
-
-  addUser() {
-    this.setState({ loading: true });
-    addUser(this.state.fname, this.state.lname)
-      .then(res => {
-        this.setState({ loading: false });
-      });
-  }
-
-  // editUser() {
-  //   this.setState({ loading: true });
-  //   editUser(this.state.fname, this.state.lname)
-  //     .then(res => {
-  //       this.setState({ loading: false });
-  //     });
-  // }
-
-  cancel() {
-    history.push('/');
+    this.editUser = this.editUser.bind(this);
   }
 
   componentDidMount() {
@@ -68,6 +46,30 @@ class Addedit extends Component {
           );
         }
       });
+  }
+
+  setValue(e) {
+    this.setState({ [e.target.name]: e.target.value });
+  }
+
+  addUser() {
+    this.setState({ loading: true });
+    addUser(this.state.fname, this.state.lname)
+      .then(res => {
+        this.setState({ loading: false });
+      });
+  }
+
+  editUser() {
+    this.setState({ loading: true });
+    editUser(this.state.fname, this.state.lname)
+      .then(res => {
+        this.setState({ loading: false });
+      });
+  }
+
+  cancel() {
+    history.push('/');
   }
 
   render() {
@@ -104,9 +106,15 @@ class Addedit extends Component {
           </div>
           <div>
             <p>
-              <button className='submit' onClick={this.addUser}>
-                {loading ? 'Please wait...' : 'Submit'}
-              </button>
+              {this.props.match.path === '/add' ?
+                <button className='submit' onClick={this.addUser}>
+                  {loading ? 'Please wait...' : 'Add user'}
+                </button>
+                :
+                <button className='submit' onClick={this.editUser}>
+                  {loading ? 'Please wait...' : 'Edit'}
+                </button>
+              }
               <button className='cancel' onClick={this.cancel}>cancel</button>
             </p>
           </div>
