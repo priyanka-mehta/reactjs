@@ -57,6 +57,7 @@ class Addedit extends Component {
     addUser(this.state.fname, this.state.lname)
       .then(res => {
         this.setState({ loading: false });
+        history.push('/');
       });
   }
 
@@ -65,6 +66,7 @@ class Addedit extends Component {
     editUser(this.state.fname, this.state.lname)
       .then(res => {
         this.setState({ loading: false });
+        history.push('/');
       });
   }
 

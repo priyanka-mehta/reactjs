@@ -13,16 +13,14 @@ class Header extends Component {
         </p>
         <p className='subheading'>
           <NavLink exact to='/' className='link'>Record List</NavLink>
-          |
+          &nbsp;|&nbsp;
           <span>
             <NavLink exact to='/add' className='link'>Add Record</NavLink>
           </span>
         </p>
       </div>
     );
-  
   }
-
 }
 
 export default Header;

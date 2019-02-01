@@ -54,7 +54,9 @@ class Recordlist extends Component {
       <div key={`btn${i + 1}`} style={{ float: 'left', height: 50, width: 35, textAlign: 'center' }}>
         <button value={i + 1} className={(Number(this.state.pages.page) === i + 1) ? "btn active" : "btn"}
           disabled={Number(this.state.pages.page) === i + 1}
-          onClick={(e) => this.onClick(e)}> {i + 1}</button ></div>
+          onClick={(e) => this.onClick(e)}> {i + 1}
+        </button >
+      </div>
     );
   }
   // pageNumber() {
