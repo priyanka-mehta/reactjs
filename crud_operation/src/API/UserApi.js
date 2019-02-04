@@ -1,26 +1,33 @@
 import * as interceptor from './../HttpIterceptor/HttpInterceptor';
 
+const baseUrl = 'https://reqres.in/api/';
+
 export const fetchUserList = (id) => {
   const apiurl = `users?page=${id}`;
-  return interceptor.get(apiurl);
+  let fullUrl = `${baseUrl}${apiurl}`;
+  return interceptor.posts(fullUrl).get();
 };
 
 export const getUser = (id) => {
   const apiurl = `users/${id}`;
-  return interceptor.get(apiurl);
+  let fullUrl = `${baseUrl}${apiurl}`;
+  return interceptor.posts(fullUrl).get();
 };
 
 export const addUser = (fname, lname) => {
   const apiurl = `users`;
-  return interceptor.post(apiurl, fname, lname);
+  let fullUrl = `${baseUrl}${apiurl}`;
+  return interceptor.posts(fullUrl).post(fname, lname);
 };
 
 export const editUser = (fname, lname, id) => {
   const apiurl = `users/${id}`;
-  return interceptor.put(apiurl, fname, lname);
+  let fullUrl = `${baseUrl}${apiurl}`;
+  return interceptor.posts(fullUrl).put(fname, lname);
 };
 
 export const deleteRecord = (id) => {
   const apiurl = `users/${id}`;
-  return interceptor.deleteRecord(apiurl);
+  let fullUrl = `${baseUrl}${apiurl}`;
+  return interceptor.posts(fullUrl).delete();
 };

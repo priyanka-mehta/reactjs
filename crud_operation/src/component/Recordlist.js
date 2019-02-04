@@ -111,7 +111,7 @@ class Recordlist extends Component {
                   <div className="tableData rightBorder"> {u.last_name} </div>
                   <div className="tableData rightBorder"> <img src={u.avatar} alt="Profile" className='image' /> </div>
                   <div className="tableData">
-                    <NavLink to={`/user/${i + 1}`} className='link1'>Edit</NavLink>
+                    <NavLink to={`/user/${u.id}`} className='link1'>Edit</NavLink>
                     |
                     <NavLink to={`/delete/${i + 1}`} onClick={this.isDelete} className='link1'>Delete</NavLink>
                   </div>

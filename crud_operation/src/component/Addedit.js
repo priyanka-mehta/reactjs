@@ -18,34 +18,29 @@ class Addedit extends Component {
       lname: '',
       loading: false,
       avatar: '',
+      id: '',
     };
     this.setValue = this.setValue.bind(this);
     this.addUser = this.addUser.bind(this);
     this.cancel = this.cancel.bind(this);
-    this.getUser = this.getUser.bind(this);
     this.editUser = this.editUser.bind(this);
   }
 
-  componentDidMount() {
-    if (this.props.match.params.id == true) {
-      this.getUser();
+  async componentDidMount() {
+    await this.setState({ id: Number(this.props.match.params.id) });
+    if (this.state.id) {
+      let res = await getUser(this.state.id);
+      if (res.data || res.data.data || res.data.data.data) {
+        this.setState(
+          {
+            loading: false,
+            fname: res.data.data.first_name,
+            lname: res.data.data.last_name,
+            avatar: res.data.data.avatar,
+          }
+        );
+      }
     }
-  }
-
-  getUser() {
-    getUser(this.props.match.params.id)
-      .then(res => {
-        if (res.data || res.data.data || res.data.data.data) {
-          this.setState(
-            {
-              loading: false,
-              fname: res.data.data.first_name,
-              lname: res.data.data.last_name,
-              avatar: res.data.data.avatar,
-            }
-          );
-        }
-      });
   }
 
   setValue(e) {
