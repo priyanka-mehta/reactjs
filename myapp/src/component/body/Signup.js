@@ -51,7 +51,7 @@ class Signup extends Component {
     validateName(e) {
         const name = e.target.value;
         let isValid = false;
-        var re = /^\(?([0-9]{3})\)?[-. ]?([0-9]{3})[-. ]?([0-9]{4})$/;
+        var re = /^[a-z ,.'-]+$/i;
         isValid = re.test(String(name).toLowerCase());
 
         this.setState({ isValidName: isValid });
@@ -60,7 +60,7 @@ class Signup extends Component {
     validatePassword(e) {
         const password = e.target.value;
         let isValid = false;
-        var re = /^\(?([0-9]{3})\)?[-. ]?([0-9]{3})[-. ]?([0-9]{4})$/;
+        var re = /^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{8,}$/;
         isValid = re.test(String(password).toLowerCase());
         this.setState({ isValidPassword: isValid });
     }
