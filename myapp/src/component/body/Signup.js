@@ -44,7 +44,6 @@ class Signup extends Component {
         let isValid = false;
         var re = /^\(?([0-9]{3})\)?[-. ]?([0-9]{3})[-. ]?([0-9]{4})$/;
         isValid = re.test(String(number).toLowerCase());
-
         this.setState({ isValidNumber: isValid });
     }
 
@@ -60,7 +59,7 @@ class Signup extends Component {
     validatePassword(e) {
         const password = e.target.value;
         let isValid = false;
-        var re = /^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{8,}$/;
+        var re = /^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{6,}$/;
         isValid = re.test(String(password).toLowerCase());
         this.setState({ isValidPassword: isValid });
     }
@@ -100,7 +99,7 @@ class Signup extends Component {
                                 onBlur={this.validatePassword}
                                 onChange={e => this.onChange(e, 'password')}
                             />
-                            {isValidPassword ? null : <div><span style={{ color: 'red', fontFamily: 'Times New Roman' }}>Please enter Strong Password.</span><br /></div>}
+                            {isValidPassword ? null : <div><span style={{ color: 'red', fontFamily: 'Times New Roman' }}>Password must contain 6 characters, 1 number and 1 special symbol</span><br /></div>}
                         </p>
                         <p>
                             <input
