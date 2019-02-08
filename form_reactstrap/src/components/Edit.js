@@ -9,8 +9,6 @@ class Edit extends Component {
       fname: 'Priyanka',
       lname: 'Mehta',
       email: 'priyanka@gmail.com',
-      // password: 'Priyanka@123',
-      // confirmPassword: 'Priyanka@123',
       address: 'Gandhidham',
       gender: 'female',
       number: '9426521497',
@@ -27,7 +25,7 @@ class Edit extends Component {
   }
 
   render() {
-    const { fname, lname, number,email,address } = this.state;
+    const { fname, lname, number,email,address} = this.state;
     return (
       <div>
         <Container style={{ 'inlineSize': '40%', 'marginTop': '1%' }}>
@@ -101,34 +99,6 @@ class Edit extends Component {
                 </td>
               </tr>
 
-              {/* <tr>
-                <td>
-                  <InputComponent
-                    style={{ 'inlineSize': '100%' }}
-                    type="password"
-                    className="signup"
-                    name="password"
-                    placeholder="Enter Password"
-                    value={this.props.value}
-                    onBlur={this.validatePassword}
-                    onChange={e => this.props.setValue(e)}
-                  />
-                 
-                </td>
-                <td>
-                  <InputComponent
-                    style={{ 'inlineSize': '100%' }}
-                    type="password"
-                    className="signup"
-                    name="confirmPassword"
-                    placeholder="Confirm Password"
-                    value={this.state.value}
-                    onBlur={e => this.props.passwordCheck()}
-                    onChange={e => this.props.setValue(e)}
-                  />
-                </td>
-              </tr> */}
-
               <tr>
                 <td colSpan='2'>
                   <textarea
@@ -162,7 +132,7 @@ class Edit extends Component {
                       className="signup"
                       name="gender"
                       value="female"
-                      onChange={e => this.props.setValue(e)}
+                      onChange={e => this.setValue(e)}
                       checked={this.state.gender === 'female'}
                     />Female
                   </FormGroup>

@@ -23,7 +23,7 @@ class App extends Component {
     this.validate = this.validate.bind(this);
     this.onChange = this.onChange.bind(this);
     this.passwordCheck = this.passwordCheck.bind(this);
-    this.onChangeHobbies=this.onChangeHobbies.bind(this);
+    this.onChangeHobbies = this.onChangeHobbies.bind(this);
   }
 
   passwordCheck() {
@@ -36,13 +36,18 @@ class App extends Component {
   }
 
   onSubmit() {
-    if ((this.validate()) && (this.state.signup.password === this.state.signup.confirmPassword)) {
-      let array = this.state.user.concat(this.state.signup);
-      this.setState({ user: array });
-      alert('User Registered successfully');
+    if (this.validate()) {
+      if (this.state.signup.password === this.state.signup.confirmPassword) {
+        let array = this.state.user.concat(this.state.signup);
+        this.setState({ user: array });
+        alert('User Registered successfully');
+      }
+      else {
+        alert('Password not match');
+      }
     }
     else {
-      alert('User already exists Or Password not match');
+      alert('User already exists');
     }
   }
 
@@ -59,7 +64,7 @@ class App extends Component {
 
   onChangeHobbies(e) {
     let signup = { ...this.state.signup };
-    signup[e.target.name] = [ ...this.state.signup.hobbies, e.target.value ];
+    signup[e.target.name] = [...this.state.signup.hobbies, e.target.value];
     this.setState({ signup });
   }
 
@@ -71,7 +76,7 @@ class App extends Component {
   render() {
     return (
       <div>
-        <Signup setValue={this.onChange} onSubmit={this.onSubmit} data={this.state.signup} passwordCheck={this.passwordCheck} onChangeHobbies={this.onChangeHobbies} />
+        <Signup setValue={this.onChange} onSubmit={this.onSubmit} data={this.state.signup} onChangeHobbies={this.onChangeHobbies} />
         <NavLink to={`/Edit`} className='link1'>Edit</NavLink>
       </div>
     );
