@@ -76,7 +76,7 @@ class App extends Component {
   render() {
     return (
       <div>
-        <Signup setValue={this.onChange} onSubmit={this.onSubmit} data={this.state.signup} onChangeHobbies={this.onChangeHobbies} />
+        <Signup setValue={this.onChange} onSubmit={this.onSubmit} data={this.state.signup} passwordCheck={this.passwordCheck} onChangeHobbies={this.onChangeHobbies} />
         <NavLink to={`/Edit`} className='link1'>Edit</NavLink>
       </div>
     );
