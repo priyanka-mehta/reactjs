@@ -1,270 +1,300 @@
 import React, { Component } from 'react';
-import InputComponent from './InputComponent';
-import TextareaComponent from './TextareaComponent';
-import { Button, Container, Table, InputGroupAddon, InputGroup, FormGroup } from 'reactstrap';
-import './../css_files/Signup.css';
+
+import { onSubmit } from './../submitValidation';
+import { reValidation } from '../reValidation';
+
+import CheckboxComponent from '../CheckboxComponent';
+import InputComponent from '../InputComponent';
+import TextareaComponent from '../TextareaComponent';
+
+import { Button, Container, Row, Col } from 'reactstrap';
+import { signup, input } from './style';
+
 
 class Signup extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      isValidEmail: true,
-      isValidNumber: true,
-      isValidFname: true,
-      isValidPassword: true,
-      isValidLname: true,
-      isValidGender: true
+      signup: {
+        name: '',
+        email: '',
+        password: '',
+        confirmPassword: '',
+        address: '',
+        gender: '',
+        number: '',
+        hobbies: [],
+      },
+      user: [],
+      error: {},
+      checkbox: [
+        {
+          id: 1,
+          value: "singing",
+          name: "hobbies",
+          label: "Singing"
+        },
+        {
+          id: 2,
+          value: "dancing",
+          name: "hobbies",
+          label: "Dancing"
+        },
+      ]
     };
+    this.onChange = this.onChange.bind(this);
+    this.onChangeHobbies = this.onChangeHobbies.bind(this);
+    this.isValidation = this.isValidation.bind(this);
     this.validateEmail = this.validateEmail.bind(this);
-    this.validateNumber = this.validateNumber.bind(this);
-    this.validateName = this.validateName.bind(this);
-    this.validatePassword = this.validatePassword.bind(this);
     this.onSubmit = this.onSubmit.bind(this);
-  }
-  validateEmail(e) {
-    const email = e.target.value;
-    let isValid = false;
-    var re = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
-    isValid = re.test(String(email).toLowerCase());
-
-    this.setState({ isValidEmail: isValid });
+    this.edit = this.edit.bind(this);
   }
 
-  validateNumber(e) {
-    const number = e.target.value;
-    let isValid = false;
-    var re = /^\(?([0-9]{3})\)?[-. ]?([0-9]{3})[-. ]?([0-9]{4})$/;
-    isValid = re.test(String(number).toLowerCase());
-    this.setState({ isValidNumber: isValid });
+  onChange(name, value) {
+    this.setState({ signup: { ...this.state.signup, [name]: value } });
   }
 
-  validateName(e) {
-    if (e.target.name === 'fname') {
-      const name = e.target.value;
-      let isValid = false;
-      var fname = /^[a-z ,.'-]+$/i;
-      isValid = fname.test(String(name).toLowerCase());
-      this.setState({ isValidFname: isValid });
+  onChangeHobbies(e) {
+    let signup = { ...this.state.signup };
+    signup[e.target.name] = [...this.state.signup.hobbies, e.target.value];
+    this.setState({ signup });
+  }
+
+  isValidation(name, value) {
+    let validation = reValidation(name, value)
+    this.setState({ error: { ...this.state.error, [name]: validation } })
+  }
+
+  validateEmail() {
+    let valid = true;
+    for (let i = 0; i < this.state.user.length; i++) {
+      if (this.state.user[i].email === this.state.signup.email) {
+        valid = false;
+      }
+      else { valid = true }
     }
-    if (e.target.name === 'lname') {
-      const name = e.target.value;
-      let isValid = false;
-      var lname = /^[a-z ,.'-]+$/i;
-      isValid = lname.test(String(name).toLowerCase());
-      this.setState({ isValidLname: isValid });
-    }
+    return valid;
   }
 
-  validatePassword(e) {
-    const password = e.target.value;
-    let isValid = false;
-    var re = /^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{6,}$/;
-    isValid = re.test(String(password).toLowerCase());
-    this.setState({ isValidPassword: isValid });
+  passwordCheck() {
+    if (this.state.signup.password === this.state.signup.confirmPassword) {
+      console.log("Password match");
+    }
+    else {
+      alert("Password not match");
+    }
   }
 
   onSubmit(e) {
-    const { fname, email, number, password, lname, gender } = this.props.data;
-    if (fname === '') {
-      this.setState({ isValidFname: false });
+    let errorFound = onSubmit(this.state.signup, this.state.error);
+    if (errorFound) {
+      this.setState({ error: errorFound });
     }
-    if (lname === '') {
-      this.setState({ isValidLname: false });
-    }
-    if (email === '') {
-      this.setState({ isValidEmail: false });
-    }
-    if (password === '') {
-      this.setState({ isValidPassword: false });
-    }
-    if (number === '') {
-      this.setState({ isValidNumber: false });
-    }
-    if (gender === '') {
-      this.setState({ isValidGender: false })
+    else if (this.validateEmail()) {
+      if (this.state.signup.password === this.state.signup.confirmPassword) {
+        let array = this.state.user.concat(this.state.signup);
+        this.setState({ user: array });
+        alert('User Registered successfully');
+      }
+      else {
+        alert('Password not match');
+      }
     }
     else {
-      this.props.onSubmit();
+      alert('User already exists');
     }
   }
 
+
+
+  edit() {
+    this.setState({
+      signup: {
+        name: 'Priyanka',
+        email: 'priyanka@gmail.com',
+        password: 'Priyanka@123',
+        confirmPassword: 'Priyanka@123',
+        address: 'Gandhidham',
+        gender: 'female',
+        number: '9426521497',
+        hobbies: 'singing',
+      }
+    })
+    console.log(this.state.signup);
+  }
+
   render() {
-    const { isValidEmail, isValidNumber, isValidFname, isValidPassword, isValidLname, isValidGender } = this.state;
+
+    const { name, number, email, password, confirmPassword, address, gender, hobbies } = this.state.signup;
     return (
       <div>
-        <Container style={{ 'inlineSize': '40%', 'marginTop': '1%' }}>
-          <Table bordered>
-            <tbody>
+        <Container style={signup}>
+          <Row>
+            <Col ><h1><u>Registration Form</u></h1></Col>
+          </Row>
+          <hr />
+          <Row>
+            <Col>Full Name</Col>
+          </Row>
+          <Row>
+            <Col>
+              <InputComponent
+                style={input}
+                type="text"
+                className="signup"
+                name="name"
+                placeholder="Enter First Name"
+                value={name}
+                onBlur={(e) => this.isValidation(e.target.name, e.target.value)}
+                onChange={(e) => this.onChange(e.target.name, e.target.value)}
+              />
+              {this.state.error.name ? <div><span style={{ color: 'red', fontFamily: 'Times New Roman' }}>{this.state.error.name}</span></div> : null}
+            </Col>
+          </Row>
 
-              <tr>
-                <th colSpan='2'><h1><b><center>Registration Form</center></b></h1></th>
-              </tr>
+          <Row>
+            <Col>Contact Number</Col>
+          </Row>
+          <Row>
+            <Col>
+              <InputComponent
+                style={input}
+                type="number"
+                className="signup"
+                name="number"
+                placeholder="Enter Contact Number"
+                value={number}
+                onBlur={(e) => this.isValidation(e.target.name, e.target.value)}
+                onChange={(e) => this.onChange(e.target.name, e.target.value)}
+              />
+              {this.state.error.number ? <div><span style={{ color: 'red', fontFamily: 'Times New Roman' }}>{this.state.error.number}</span></div> : null}
+            </Col>
+          </Row>
+          <Row>
+            <Col>Address</Col>
+          </Row>
+          <Row>
+            <Col>
+              <TextareaComponent
+                style={input}
+                rows="4"
+                cols="20"
+                className="signup"
+                name="address"
+                placeholder="Enter Address"
+                value={address}
+                onChange={e => this.onChange(e.target.name, e.target.value)}
+              />
+            </Col>
+          </Row>
+          <hr />
+          <Row>
+            <Col>Email id</Col></Row><Row>
+            <Col>
+              <InputComponent
+                style={input}
+                type="email"
+                className="signup"
+                name="email"
+                placeholder="Enter Email"
+                value={email}
+                onBlur={(e) => this.isValidation(e.target.name, e.target.value)}
+                onChange={(e) => this.onChange(e.target.name, e.target.value)}
+              />
+              {this.state.error.email ? <div><span style={{ color: 'red', fontFamily: 'Times New Roman' }}>{this.state.error.email}</span></div> : null}
+            </Col>
+          </Row>
 
-              <tr>
-                <td>
-                  <InputComponent
-                    style={{ 'inlineSize': '100%' }}
-                    type="text"
-                    className="signup"
-                    name="fname"
-                    placeholder="Enter First Name"
-                    value={this.props.value}
-                    onBlur={this.validateName}
-                    onChange={e => this.props.setValue(e)}
-                  />
-                  {isValidFname ? null : <div><span style={{ color: 'red', fontFamily: 'Times New Roman' }}>Please enter valid name</span><br /></div>}
-                </td>
-                <td>
-                  <InputComponent
-                    style={{ 'inlineSize': '100%' }}
-                    type="text"
-                    className="signup"
-                    name="lname"
-                    placeholder="Enter Last Name"
-                    value={this.props.value}
-                    onBlur={this.validateName}
-                    onChange={e => this.props.setValue(e)}
-                  />
-                  {isValidLname ? null : <div><span style={{ color: 'red', fontFamily: 'Times New Roman' }}>Please enter valid name</span><br /></div>}
-                </td>
-              </tr>
+          <Row>
+            <Col>Password</Col>
+          </Row>
+          <Row>
+            <Col>
+              <InputComponent
+                style={input}
+                type="password"
+                className="signup"
+                name="password"
+                placeholder="Enter Password"
+                value={password}
+                onBlur={(e) => this.isValidation(e.target.name, e.target.value)}
+                onChange={(e) => this.onChange(e.target.name, e.target.value)}
+              />
+              {this.state.error.password ? <div><span style={{ color: 'red', fontFamily: 'Times New Roman' }}>{this.state.error.password}</span></div> : null}
+            </Col>
+          </Row>
 
-              <tr>
-                <td colSpan='2'>
-                  <InputGroup>
-                    <InputComponent
-                      style={{ 'inlineSize': '100%' }}
-                      type="number"
-                      className="signup"
-                      name="number"
-                      placeholder="Enter Contact Number"
-                      value={this.props.value}
-                      onBlur={this.validateNumber}
-                      onChange={e => this.props.setValue(e)}
-                    />
-                    {isValidNumber ? null : <div><span style={{ color: 'red', fontFamily: 'Times New Roman' }}>Please enter valid 10 digit Number</span><br /></div>}
-                  </InputGroup>
-                </td>
-              </tr>
+          <Row>
+            <Col>Confirm Password</Col>
+          </Row>
+          <Row>
+            <Col>
+              <InputComponent
+                style={input}
+                type="password"
+                className="signup"
+                name="confirmPassword"
+                placeholder="Confirm Password"
+                value={confirmPassword}
+                onBlur={(e) => this.passwordCheck(e)}
+                onChange={(e) => this.onChange(e.target.name, e.target.value)}
+              />
+            </Col>
+          </Row>
 
-              <tr>
-                <td colSpan='2'>
-                  <InputGroup>
-                    <InputComponent
-                      style={{ 'inlineSize': '60%' }}
-                      type="email"
-                      className="signup"
-                      name="email"
-                      placeholder="Enter Email"
-                      value={this.props.value}
-                      onBlur={this.validateEmail}
-                      onChange={e => this.props.setValue(e)}
-                    />
-                    <InputGroupAddon style={{ 'inlineSize': '30%' }} addonType="append">@gmail.com</InputGroupAddon>
-                    {isValidEmail ? null : <div><span style={{ color: 'red', fontFamily: 'Times New Roman' }}>Please enter valid email.</span><br /></div>}
-                  </InputGroup>
-                </td>
-              </tr>
+          <hr />
+          <Row>
+            <Col sm='2'>Gender</Col>
+          </Row>
+          <Row>
+            <InputComponent
+              type="radio"
+              className="signup"
+              name="gender"
+              value='male'
+              onChange={e => this.onChange(e.target.name, e.target.value)}
+              onBlur={(e) => this.isValidation(e.target.name, e.target.value)}
+              checked={gender === 'male'}
+            />Male
+             <InputComponent
+              type="radio"
+              className="signup"
+              name="gender"
+              value='female'
+              onChange={e => this.onChange(e.target.name, e.target.value)}
+              onBlur={(e) => this.isValidation(e.target.name, e.target.value)}
+              checked={gender === 'female'}
+            />Female
+              {this.state.error.gender ? <div><span style={{ color: 'red', fontFamily: 'Times New Roman' }}>{this.state.error.gender}</span></div> : null}
+          </Row>
+          <hr />
+          <Row>
+            <Col sm='2'>Hobbies</Col>
+          </Row>
+          <Row>
+            <Col>
+              <CheckboxComponent
+                checkbox={this.state.checkbox}
+                onChange={e => this.onChangeHobbies(e)}
+              />
+            </Col>
+            {this.state.error.hobbies ? <div><span style={{ color: 'red', fontFamily: 'Times New Roman' }}>{this.state.error.hobbies}</span></div> : null}
+          </Row>
+          <hr />
 
-              <tr>
-                <td>
-                  <InputComponent
-                    style={{ 'inlineSize': '100%' }}
-                    type="password"
-                    className="signup"
-                    name="password"
-                    placeholder="Enter Password"
-                    value={this.props.value}
-                    onBlur={this.validatePassword}
-                    onChange={e => this.props.setValue(e)}
-                  />
-                  {isValidPassword ? null : <div><span style={{ color: 'red', fontFamily: 'Times New Roman' }}>Password must contain 6 characters,<br />1 number and 1 special character</span><br /></div>}
-                </td>
-                <td>
-                  <InputComponent
-                    style={{ 'inlineSize': '100%' }}
-                    type="password"
-                    className="signup"
-                    name="confirmPassword"
-                    placeholder="Confirm Password"
-                    value={this.props.value}
-                    onBlur={e => this.props.passwordCheck()}
-                    onChange={e => this.props.setValue(e)}
-                  />
-                </td>
-              </tr>
-
-              <tr>
-                <td colSpan='2'>
-                  <TextareaComponent
-                    style={{ 'inlineSize': '100%' }}
-                    rows="4"
-                    cols="43"
-                    className="signup"
-                    name="address"
-                    placeholder="Enter Address"
-                    value={this.props.value}
-                    onChange={e => this.props.setValue(e)}
-                  />
-                </td>
-              </tr>
-              <tr>
-                <td>Gender</td>
-                <td>
-                  <FormGroup>
-                    <InputComponent
-                      type="radio"
-                      className="signup"
-                      name="gender"
-                      value="male"
-                      onChange={e => this.props.setValue(e)}
-                    />Male
-
-                    <InputComponent
-                      type="radio"
-                      className="signup"
-                      name="gender"
-                      value="female"
-                      onChange={e => this.props.setValue(e)}
-                    />Female
-                  </FormGroup>
-                  {isValidGender ? null : <div><span style={{ color: 'red', fontFamily: 'Times New Roman' }}>Please Select Gender</span><br /></div>}
-                </td>
-
-              </tr>
-
-              <tr>
-                <td>Hobbies</td>
-                <td>
-                  <InputComponent
-                    type="checkbox"
-                    className="signup"
-                    name="hobbies"
-                    value="Singing"
-                    onChange={e => this.props.onChangeHobbies(e)}
-                  />Singing
-                  <InputComponent
-                    type="checkbox"
-                    className="signup"
-                    name="hobbies"
-                    value="Dancing"
-                    onChange={e => this.props.onChangeHobbies(e)}
-                  />Dancing
-                </td>
-              </tr>
-
-              <tr>
-                <td colSpan='2' align='center'>
-                  <Button color='secondary' id="button" onClick={() => this.onSubmit()}>Signup</Button><br />
-                </td>
-              </tr>
-
-            </tbody>
-
-          </Table>
+          <Row>
+            <Col sm='2'>
+              <Button color='secondary' id="button" onClick={() => this.onSubmit()}>Signup</Button><br />
+            </Col>
+            <Col sm='2'>
+              <Button color='secondary' id="edit" onClick={e => this.edit(e)}>Edit</Button><br />
+            </Col>
+          </Row>
+          <hr />
         </Container>
       </div>
     );
   }
 }
 export default Signup;
+

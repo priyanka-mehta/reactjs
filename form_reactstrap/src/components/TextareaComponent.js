@@ -1,21 +1,20 @@
 import React, { Component } from 'react';
 
-class InputComponent extends Component {
+class TextareaComponent extends Component {
   render() {
     return (
-      <input
+      <textarea
         style={this.props.style}
-        type={this.props.type}
+        rows={this.props.rows}
+        cols={this.props.cols}
         className={this.props.className}
         name={this.props.name}
-        value={this.props.value}
         placeholder={this.props.placeholder}
-        onBlur={this.props.onBlur}
+        value={this.props.value}
         onChange={this.props.onChange}
-        checked={this.props.checked}
       />
     );
   }
 }
 
-export default InputComponent;
+export default TextareaComponent;
