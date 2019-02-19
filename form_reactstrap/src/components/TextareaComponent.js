@@ -4,7 +4,7 @@ class TextareaComponent extends Component {
   render() {
     return (
       <textarea
-        style={this.props.style}
+        style={{ 'inlineSize': '100%' }}
         rows={this.props.rows}
         cols={this.props.cols}
         className={this.props.className}

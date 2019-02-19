@@ -4,14 +4,14 @@ export const onSubmit = (signup, error) => {
   for (let field in fields) {
     if (fields[field] === "") {
       result = true
-      error[field] = "Please fill :  " + field;
+      error[field] = "Please enter " + field;
     }
   }
   if (result) {
     return error;
   }
   else if (!fields.name.match("[a-zA-Z]+\\.?")) {
-    error[fields] = "please enter valid " + fields.name;
+    error[fields] = "Please enter valid " + fields.name;
     return error;
   }
   else {

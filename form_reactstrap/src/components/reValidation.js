@@ -17,16 +17,18 @@ export const reValidation = (name, value) => {
       re = /^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{8,}$/;
       break;
     }
-    case 'confirmPassword': {
-      re = /^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{8,}$/;
-      break;
-    }
     default:
   }
-  if (value.match(re)) {
-    return true;
-  } else {
-    let msg = "please enter valid " + name;
+  if (value !== '') {
+    if (value.match(re)) {
+      return true;
+    } else {
+      let msg = "Please enter valid " + name;
+      return msg;
+    }
+  }
+  else {
+    let msg = "Please enter " + name;
     return msg;
   }
 }

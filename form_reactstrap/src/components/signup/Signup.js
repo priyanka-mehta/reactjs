@@ -6,10 +6,11 @@ import { reValidation } from '../reValidation';
 import CheckboxComponent from '../CheckboxComponent';
 import InputComponent from '../InputComponent';
 import TextareaComponent from '../TextareaComponent';
+import RadioComponent from '../RadioComponent';
 
 import { Button, Container, Row, Col } from 'reactstrap';
-import { signup, input } from './style';
 
+import { signup } from './style';
 
 class Signup extends Component {
   constructor(props) {
@@ -24,9 +25,24 @@ class Signup extends Component {
         gender: '',
         number: '',
         hobbies: [],
+        country: [],
       },
       user: [],
       error: {},
+      radio: [
+        {
+          id: 1,
+          value: "female",
+          name: "gender",
+          label: "Female"
+        },
+        {
+          id: 2,
+          value: "male",
+          name: "gender",
+          label: "Male"
+        }
+      ],
       checkbox: [
         {
           id: 1,
@@ -40,7 +56,8 @@ class Signup extends Component {
           name: "hobbies",
           label: "Dancing"
         },
-      ]
+      ],
+      confirmPasswordErr: null,
     };
     this.onChange = this.onChange.bind(this);
     this.onChangeHobbies = this.onChangeHobbies.bind(this);
@@ -48,6 +65,11 @@ class Signup extends Component {
     this.validateEmail = this.validateEmail.bind(this);
     this.onSubmit = this.onSubmit.bind(this);
     this.edit = this.edit.bind(this);
+    this.onChangeCountry = this.onChangeCountry.bind(this);
+  }
+
+  onChangeCountry(Country) {
+    this.setState({ signup: { Country } });
   }
 
   onChange(name, value) {
@@ -78,10 +100,10 @@ class Signup extends Component {
 
   passwordCheck() {
     if (this.state.signup.password === this.state.signup.confirmPassword) {
-      console.log("Password match");
+      this.setState({ confirmPasswordErr: true })
     }
     else {
-      alert("Password not match");
+      this.setState({ confirmPasswordErr: false })
     }
   }
 
@@ -105,8 +127,6 @@ class Signup extends Component {
     }
   }
 
-
-
   edit() {
     this.setState({
       signup: {
@@ -124,13 +144,12 @@ class Signup extends Component {
   }
 
   render() {
-
-    const { name, number, email, password, confirmPassword, address, gender, hobbies } = this.state.signup;
+    const { name, number, email, password, confirmPassword, address } = this.state.signup;
     return (
       <div>
         <Container style={signup}>
           <Row>
-            <Col ><h1><u>Registration Form</u></h1></Col>
+            <Col><h1><u>Registration Form</u></h1></Col>
           </Row>
           <hr />
           <Row>
@@ -139,7 +158,6 @@ class Signup extends Component {
           <Row>
             <Col>
               <InputComponent
-                style={input}
                 type="text"
                 className="signup"
                 name="name"
@@ -158,7 +176,6 @@ class Signup extends Component {
           <Row>
             <Col>
               <InputComponent
-                style={input}
                 type="number"
                 className="signup"
                 name="number"
@@ -176,7 +193,6 @@ class Signup extends Component {
           <Row>
             <Col>
               <TextareaComponent
-                style={input}
                 rows="4"
                 cols="20"
                 className="signup"
@@ -192,7 +208,6 @@ class Signup extends Component {
             <Col>Email id</Col></Row><Row>
             <Col>
               <InputComponent
-                style={input}
                 type="email"
                 className="signup"
                 name="email"
@@ -211,7 +226,6 @@ class Signup extends Component {
           <Row>
             <Col>
               <InputComponent
-                style={input}
                 type="password"
                 className="signup"
                 name="password"
@@ -230,7 +244,6 @@ class Signup extends Component {
           <Row>
             <Col>
               <InputComponent
-                style={input}
                 type="password"
                 className="signup"
                 name="confirmPassword"
@@ -241,31 +254,28 @@ class Signup extends Component {
               />
             </Col>
           </Row>
-
+          <Row>
+            <Col>
+              {this.state.confirmPasswordErr === false ? <div><span style={{ color: 'red', fontFamily: 'Times New Roman' }}>Password and confirm Password must match</span></div> : null}
+            </Col>
+          </Row>
           <hr />
           <Row>
-            <Col sm='2'>Gender</Col>
+            <Col>Gender</Col>
           </Row>
           <Row>
-            <InputComponent
-              type="radio"
-              className="signup"
-              name="gender"
-              value='male'
-              onChange={e => this.onChange(e.target.name, e.target.value)}
-              onBlur={(e) => this.isValidation(e.target.name, e.target.value)}
-              checked={gender === 'male'}
-            />Male
-             <InputComponent
-              type="radio"
-              className="signup"
-              name="gender"
-              value='female'
-              onChange={e => this.onChange(e.target.name, e.target.value)}
-              onBlur={(e) => this.isValidation(e.target.name, e.target.value)}
-              checked={gender === 'female'}
-            />Female
+            <Col>
+              <RadioComponent
+                radio={this.state.radio}
+                onBlur={(e) => this.isValidation(e.target.name, e.target.value)}
+                onChange={e => this.onChange(e.target.name, e.target.value)}
+              />
+            </Col>
+          </Row>
+          <Row>
+            <Col>
               {this.state.error.gender ? <div><span style={{ color: 'red', fontFamily: 'Times New Roman' }}>{this.state.error.gender}</span></div> : null}
+            </Col>
           </Row>
           <hr />
           <Row>
@@ -297,4 +307,3 @@ class Signup extends Component {
   }
 }
 export default Signup;
-

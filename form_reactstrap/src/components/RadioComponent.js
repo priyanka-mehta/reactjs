@@ -1,18 +1,19 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-export const CheckboxComponent = (props) => {
+export const RadioComponent = (props) => {
   return (
     <div>
-      {props.checkbox.map(i => {
+      {props.radio.map(i => {
         return (
           <div key={i.id}>
             <input
               id={i.id}
-              type="checkbox"
+              type="radio"
               name={i.name}
               value={i.value}
               onChange={props.onChange}
+              onBlur={props.onBlur}
               label={i.label}
             />
             {i.label}
@@ -24,17 +25,16 @@ export const CheckboxComponent = (props) => {
   );
 }
 
-CheckboxComponent.defaultProps = {
-  type: 'checkbox',
-  label: 'singing',
+RadioComponent.defaultProps = {
+  type: 'radio',
   onChange: null,
 }
 
-CheckboxComponent.propTypes = {
+RadioComponent.propTypes = {
   value: PropTypes.string,
   name: PropTypes.string,
   label: PropTypes.string,
   onChange: PropTypes.func,
 }
 
-export default CheckboxComponent;
+export default RadioComponent;
