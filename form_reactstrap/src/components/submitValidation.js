@@ -3,7 +3,7 @@ export const onSubmit = (signup, error) => {
   const fields = signup;
   for (let field in fields) {
     if (fields[field] === "") {
-      result = true
+      result = true;
       error[field] = "Please enter " + field;
     }
   }
@@ -11,7 +11,9 @@ export const onSubmit = (signup, error) => {
     return error;
   }
   else if (!fields.name.match("[a-zA-Z]+\\.?")) {
-    error[fields] = "Please enter valid " + fields.name;
+    return error;
+  }
+  else if (!fields.number.match("^[ ()+]*([0-9][ ()+]*){10}$")) {
     return error;
   }
   else {
