@@ -8,7 +8,6 @@ class InputComponent extends Component {
     return (
       <div>
         <Input
-          style={this.props.style}
           type={this.props.type}
           className={this.props.className}
           name={this.props.name}

@@ -1,9 +1,9 @@
 const style = {
     signup: {
-        border: '2px solid gray',
-        marginRight:'15%',
-        marginLeft:'12%',
-        inlineSize:'100%',
+        border: '4px solid gray',
+        padding:'20px',
+        inlineSize:'600px',
+        marginTop:'1%',
         fontFamily:'times new Roman',
     }
 }

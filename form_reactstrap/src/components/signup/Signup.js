@@ -12,12 +12,7 @@ import { Button, Container, Row, Col } from 'reactstrap';
 import Select from 'react-select';
 
 import { signup } from './style';
-
-const options = [
-  { value: 'gujarati', label: 'Gujarati' },
-  { value: 'english', label: 'English' },
-  { value: 'hindi', label: 'Hindi' }
-];
+import Axios from 'axios';
 
 class Signup extends Component {
   constructor(props) {
@@ -34,7 +29,9 @@ class Signup extends Component {
         hobbies: [],
         dob: '',
         age: '',
+        selectedCountry: null,
       },
+      country: [],
       languagesKnown: null,
       user: [],
       error: {},
@@ -74,7 +71,8 @@ class Signup extends Component {
     this.validateEmail = this.validateEmail.bind(this);
     this.onSubmit = this.onSubmit.bind(this);
     this.edit = this.edit.bind(this);
-    this.handleChange = this.handleChange.bind(this);
+    this.onChangeCountry = this.onChangeCountry.bind(this);
+    this.countryList = this.countryList.bind(this);
   }
 
   onChange(name, value) {
@@ -87,9 +85,8 @@ class Signup extends Component {
     this.setState({ signup });
   }
 
-  handleChange(languagesKnown) {
-    this.setState({ languagesKnown });
-    console.log(languagesKnown);
+  onChangeCountry(selectedCountry) {
+    this.setState({ signup: { ...this.state.signup, selectedCountry: selectedCountry } });
   }
 
   isValidation(name, value) {
@@ -153,6 +150,16 @@ class Signup extends Component {
     console.log(this.state.signup);
   }
 
+  async countryList() {
+    let data = [];
+    let result = await Axios.get('https://restcountries.eu/rest/v2/all?fields=name;region;/');
+
+    for (let i = 0; i < 250; i++) {
+      data[i] = { label: `${result.data[i].name}`, value: `${result.data[i].region}` }
+    }
+    this.setState({ country: data || [] });
+  }
+
   getAge(value) {
     var today = new Date();
     var birthDate = new Date(value);
@@ -170,14 +177,17 @@ class Signup extends Component {
       <div>
         <Container style={signup}>
           <Row>
-            <Col><h1><u>Registration Form</u></h1></Col>
+            <Col>
+              <h1 style={{ color: 'darkBlue' }}>
+                <u> Registration Form</u>
+              </h1>
+            </Col>
           </Row>
           <hr />
           <Row>
             <Col>Full Name</Col>
           </Row>
           <Row>
-
             <Col>
               <InputComponent
                 type="text"
@@ -211,6 +221,7 @@ class Signup extends Component {
           </Row>
           <Row>
             <Col>Date of Birth</Col>
+            <Col>Age</Col>
           </Row>
           <Row >
             <Col>
@@ -224,11 +235,6 @@ class Signup extends Component {
               />
               {this.state.error.dob ? <div><span style={{ color: 'red', fontFamily: 'Times New Roman' }}>{this.state.error.dob}</span></div> : null}
             </Col>
-          </Row>
-          <Row>
-            <Col>Age</Col>
-          </Row>
-          <Row >
             <Col>
               <InputComponent
                 value={age}
@@ -236,7 +242,7 @@ class Signup extends Component {
               />
             </Col>
           </Row>
-
+          
           <Row>
             <Col>Address</Col>
           </Row>
@@ -253,9 +259,25 @@ class Signup extends Component {
               />
             </Col>
           </Row>
+          <Row>
+            <Col>Select Country</Col>
+          </Row>
+          <Row>
+            <Col>
+              <Select
+                isSearchable
+                options={this.state.country}
+                value={this.state.signup.selectedCountry}
+                onFocus={this.countryList}
+                onChange={this.onChangeCountry}
+              />
+            </Col>
+          </Row>
+
           <hr />
           <Row>
-            <Col>Email id</Col></Row><Row>
+            <Col>Email id</Col></Row>
+          <Row>
             <Col>
               <InputComponent
                 type="email"
@@ -272,6 +294,7 @@ class Signup extends Component {
 
           <Row>
             <Col>Password</Col>
+            <Col>Confirm Password</Col>
           </Row>
           <Row>
             <Col>
@@ -286,12 +309,6 @@ class Signup extends Component {
               />
               {this.state.error.password ? <div><span style={{ color: 'red', fontFamily: 'Times New Roman' }}>{this.state.error.password}</span></div> : null}
             </Col>
-          </Row>
-
-          <Row>
-            <Col>Confirm Password</Col>
-          </Row>
-          <Row>
             <Col>
               <InputComponent
                 type="password"
@@ -301,17 +318,13 @@ class Signup extends Component {
                 value={confirmPassword}
                 onBlur={(e) => this.passwordCheck(e)}
                 onChange={(e) => this.onChange(e.target.name, e.target.value)}
-              />
-            </Col>
-          </Row>
-          <Row>
-            <Col>
-              {this.state.confirmPasswordErr === false ? <div><span style={{ color: 'red', fontFamily: 'Times New Roman' }}>Password and confirm Password must match</span></div> : null}
+              />{this.state.confirmPasswordErr === false ? <div><span style={{ color: 'red', fontFamily: 'Times New Roman' }}>Password and confirm Password must match</span></div> : null}
             </Col>
           </Row>
           <hr />
           <Row>
             <Col>Gender</Col>
+            <Col>Hobbies</Col>
           </Row>
           <Row>
             <Col>
@@ -319,40 +332,13 @@ class Signup extends Component {
                 radio={this.state.radio}
                 onBlur={(e) => this.isValidation(e.target.name, e.target.value)}
                 onChange={e => this.onChange(e.target.name, e.target.value)}
-              />
+              /> {this.state.error.gender ? <div><span style={{ color: 'red', fontFamily: 'Times New Roman' }}>{this.state.error.gender}</span></div> : null}
             </Col>
-          </Row>
-          <Row>
-            <Col>
-              {this.state.error.gender ? <div><span style={{ color: 'red', fontFamily: 'Times New Roman' }}>{this.state.error.gender}</span></div> : null}
-            </Col>
-          </Row>
-          <hr />
-          <Row>
-            <Col sm='2'>Hobbies</Col>
-          </Row>
-          <Row>
             <Col>
               <CheckboxComponent
                 checkbox={this.state.checkbox}
                 onChange={e => this.onChangeHobbies(e)}
-              />
-            </Col>
-            {this.state.error.hobbies ? <div><span style={{ color: 'red', fontFamily: 'Times New Roman' }}>{this.state.error.hobbies}</span></div> : null}
-          </Row>
-          <hr />
-          <Row>
-            <Col>Languages Known</Col>
-          </Row>
-          <Row>
-            <Col>
-              <Select
-                isMulti
-                isSearchable
-                value={this.state.languagesKnown}
-                options={options}
-                onChange={this.handleChange}
-              />
+              />{this.state.error.hobbies ? <div><span style={{ color: 'red', fontFamily: 'Times New Roman' }}>{this.state.error.hobbies}</span></div> : null}
             </Col>
           </Row>
           <hr />
