@@ -11,7 +11,7 @@ import RadioComponent from '../RadioComponent';
 import { Button, Container, Row, Col } from 'reactstrap';
 import Select from 'react-select';
 
-import { signup } from './style';
+import { signup, error } from './style';
 import Axios from 'axios';
 
 class Signup extends Component {
@@ -198,7 +198,7 @@ class Signup extends Component {
                 onBlur={(e) => this.isValidation(e.target.name, e.target.value)}
                 onChange={(e) => this.onChange(e.target.name, e.target.value)}
               />
-              {this.state.error.name ? <div><span style={{ color: 'red', fontFamily: 'Times New Roman' }}>{this.state.error.name}</span></div> : null}
+              {this.state.error.name ? <div><span style={error}>{this.state.error.name}</span></div> : null}
             </Col>
           </Row>
 
@@ -216,7 +216,7 @@ class Signup extends Component {
                 onBlur={(e) => this.isValidation(e.target.name, e.target.value)}
                 onChange={(e) => this.onChange(e.target.name, e.target.value)}
               />
-              {this.state.error.number ? <div><span style={{ color: 'red', fontFamily: 'Times New Roman' }}>{this.state.error.number}</span></div> : null}
+              {this.state.error.number ? <div><span style={error}>{this.state.error.number}</span></div> : null}
             </Col>
           </Row>
           <Row>
@@ -233,7 +233,7 @@ class Signup extends Component {
                 onBlur={(e) => this.getAge(e.target.value)}
                 onChange={(e) => this.onChange(e.target.name, e.target.value)}
               />
-              {this.state.error.dob ? <div><span style={{ color: 'red', fontFamily: 'Times New Roman' }}>{this.state.error.dob}</span></div> : null}
+              {this.state.error.dob ? <div><span style={error}>{this.state.error.dob}</span></div> : null}
             </Col>
             <Col>
               <InputComponent
@@ -242,7 +242,7 @@ class Signup extends Component {
               />
             </Col>
           </Row>
-          
+
           <Row>
             <Col>Address</Col>
           </Row>
@@ -288,7 +288,7 @@ class Signup extends Component {
                 onBlur={(e) => this.isValidation(e.target.name, e.target.value)}
                 onChange={(e) => this.onChange(e.target.name, e.target.value)}
               />
-              {this.state.error.email ? <div><span style={{ color: 'red', fontFamily: 'Times New Roman' }}>{this.state.error.email}</span></div> : null}
+              {this.state.error.email ? <div><span style={error}>{this.state.error.email}</span></div> : null}
             </Col>
           </Row>
 
@@ -307,7 +307,7 @@ class Signup extends Component {
                 onBlur={(e) => this.isValidation(e.target.name, e.target.value)}
                 onChange={(e) => this.onChange(e.target.name, e.target.value)}
               />
-              {this.state.error.password ? <div><span style={{ color: 'red', fontFamily: 'Times New Roman' }}>{this.state.error.password}</span></div> : null}
+              {this.state.error.password ? <div><span style={error}>{this.state.error.password}</span></div> : null}
             </Col>
             <Col>
               <InputComponent
@@ -318,7 +318,7 @@ class Signup extends Component {
                 value={confirmPassword}
                 onBlur={(e) => this.passwordCheck(e)}
                 onChange={(e) => this.onChange(e.target.name, e.target.value)}
-              />{this.state.confirmPasswordErr === false ? <div><span style={{ color: 'red', fontFamily: 'Times New Roman' }}>Password and confirm Password must match</span></div> : null}
+              />{this.state.confirmPasswordErr === false ? <div><span style={error}>Password and confirm Password must match</span></div> : null}
             </Col>
           </Row>
           <hr />
@@ -332,13 +332,13 @@ class Signup extends Component {
                 radio={this.state.radio}
                 onBlur={(e) => this.isValidation(e.target.name, e.target.value)}
                 onChange={e => this.onChange(e.target.name, e.target.value)}
-              /> {this.state.error.gender ? <div><span style={{ color: 'red', fontFamily: 'Times New Roman' }}>{this.state.error.gender}</span></div> : null}
+              /> {this.state.error.gender ? <div><span style={error}>{this.state.error.gender}</span></div> : null}
             </Col>
             <Col>
               <CheckboxComponent
                 checkbox={this.state.checkbox}
                 onChange={e => this.onChangeHobbies(e)}
-              />{this.state.error.hobbies ? <div><span style={{ color: 'red', fontFamily: 'Times New Roman' }}>{this.state.error.hobbies}</span></div> : null}
+              />{this.state.error.hobbies ? <div><span style={error}>{this.state.error.hobbies}</span></div> : null}
             </Col>
           </Row>
           <hr />
@@ -346,11 +346,10 @@ class Signup extends Component {
             <Col sm='2'>
               <Button color='secondary' id="button" onClick={() => this.onSubmit()}>Signup</Button><br />
             </Col>
-            <Col sm='2'>
+            <Col>
               <Button color='secondary' id="edit" onClick={e => this.edit(e)}>Edit</Button><br />
             </Col>
           </Row>
-          <hr />
         </Container>
       </div>
     );
