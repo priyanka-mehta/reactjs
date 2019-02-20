@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 
 import { onSubmit } from './../submitValidation';
-import { reValidation } from '../reValidation';
+import { reValidation } from './../reValidation';
 
 import CheckboxComponent from '../CheckboxComponent';
 import InputComponent from '../InputComponent';
@@ -9,8 +9,15 @@ import TextareaComponent from '../TextareaComponent';
 import RadioComponent from '../RadioComponent';
 
 import { Button, Container, Row, Col } from 'reactstrap';
+import Select from 'react-select';
 
 import { signup } from './style';
+
+const options = [
+  { value: 'gujarati', label: 'Gujarati' },
+  { value: 'english', label: 'English' },
+  { value: 'hindi', label: 'Hindi' }
+];
 
 class Signup extends Component {
   constructor(props) {
@@ -25,7 +32,10 @@ class Signup extends Component {
         gender: '',
         number: '',
         hobbies: [],
+        dob: '',
+        age: '',
       },
+      languagesKnown: null,
       user: [],
       error: {},
       radio: [
@@ -56,7 +66,7 @@ class Signup extends Component {
           label: "Dancing"
         },
       ],
-      confirmPasswordErr: null,
+      confirmPasswordErr: '',
     };
     this.onChange = this.onChange.bind(this);
     this.onChangeHobbies = this.onChangeHobbies.bind(this);
@@ -64,6 +74,7 @@ class Signup extends Component {
     this.validateEmail = this.validateEmail.bind(this);
     this.onSubmit = this.onSubmit.bind(this);
     this.edit = this.edit.bind(this);
+    this.handleChange = this.handleChange.bind(this);
   }
 
   onChange(name, value) {
@@ -74,6 +85,11 @@ class Signup extends Component {
     let signup = { ...this.state.signup };
     signup[e.target.name] = [...this.state.signup.hobbies, e.target.value];
     this.setState({ signup });
+  }
+
+  handleChange(languagesKnown) {
+    this.setState({ languagesKnown });
+    console.log(languagesKnown);
   }
 
   isValidation(name, value) {
@@ -137,8 +153,19 @@ class Signup extends Component {
     console.log(this.state.signup);
   }
 
+  getAge(value) {
+    var today = new Date();
+    var birthDate = new Date(value);
+    var age = today.getFullYear() - birthDate.getFullYear();
+    var m = today.getMonth() - birthDate.getMonth();
+    if (m < 0 || (m === 0 && today.getDate() < birthDate.getDate())) {
+      age--;
+    }
+    this.setState({ signup: { ...this.state.signup, age: age } })
+  }
+
   render() {
-    const { name, number, email, password, confirmPassword, address } = this.state.signup;
+    const { name, number, email, password, confirmPassword, address, dob, age } = this.state.signup;
     return (
       <div>
         <Container style={signup}>
@@ -150,6 +177,7 @@ class Signup extends Component {
             <Col>Full Name</Col>
           </Row>
           <Row>
+
             <Col>
               <InputComponent
                 type="text"
@@ -181,6 +209,34 @@ class Signup extends Component {
               {this.state.error.number ? <div><span style={{ color: 'red', fontFamily: 'Times New Roman' }}>{this.state.error.number}</span></div> : null}
             </Col>
           </Row>
+          <Row>
+            <Col>Date of Birth</Col>
+          </Row>
+          <Row >
+            <Col>
+              <InputComponent
+                type="date"
+                className="signup"
+                name="dob"
+                value={dob}
+                onBlur={(e) => this.getAge(e.target.value)}
+                onChange={(e) => this.onChange(e.target.name, e.target.value)}
+              />
+              {this.state.error.dob ? <div><span style={{ color: 'red', fontFamily: 'Times New Roman' }}>{this.state.error.dob}</span></div> : null}
+            </Col>
+          </Row>
+          <Row>
+            <Col>Age</Col>
+          </Row>
+          <Row >
+            <Col>
+              <InputComponent
+                value={age}
+                placeholder="Enter date of birth to view your age"
+              />
+            </Col>
+          </Row>
+
           <Row>
             <Col>Address</Col>
           </Row>
@@ -285,7 +341,21 @@ class Signup extends Component {
             {this.state.error.hobbies ? <div><span style={{ color: 'red', fontFamily: 'Times New Roman' }}>{this.state.error.hobbies}</span></div> : null}
           </Row>
           <hr />
-
+          <Row>
+            <Col>Languages Known</Col>
+          </Row>
+          <Row>
+            <Col>
+              <Select
+                isMulti
+                isSearchable
+                value={this.state.languagesKnown}
+                options={options}
+                onChange={this.handleChange}
+              />
+            </Col>
+          </Row>
+          <hr />
           <Row>
             <Col sm='2'>
               <Button color='secondary' id="button" onClick={() => this.onSubmit()}>Signup</Button><br />

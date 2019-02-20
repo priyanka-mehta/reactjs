@@ -24,7 +24,7 @@ class InputComponent extends Component {
 
 InputComponent.defaultProps = {
   type: 'text',
-  placeholder: 'Please write text'
+  placeholder: 'Please enter value'
 }
 
 InputComponent.propTypes = {
