@@ -2,16 +2,15 @@ import React, { Component } from 'react';
 
 import { onSubmit } from './../submitValidation';
 import { reValidation } from './../reValidation';
+import { signup, error } from './style';
 
-import CheckboxComponent from '../CheckboxComponent';
 import InputComponent from '../InputComponent';
 import TextareaComponent from '../TextareaComponent';
+import CheckboxComponent from '../CheckboxComponent';
 import RadioComponent from '../RadioComponent';
 
 import { Button, Container, Row, Col } from 'reactstrap';
 import Select from 'react-select';
-
-import { signup, error } from './style';
 import Axios from 'axios';
 
 class Signup extends Component {
