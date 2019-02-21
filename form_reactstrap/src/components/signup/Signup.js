@@ -2,14 +2,15 @@ import React, { Component } from 'react';
 
 import { onSubmit } from './../submitValidation';
 import { reValidation } from './../reValidation';
-import { signup, error } from './style';
+
+import './signup.css';
 
 import InputComponent from '../InputComponent';
 import TextareaComponent from '../TextareaComponent';
 import CheckboxComponent from '../CheckboxComponent';
 import RadioComponent from '../RadioComponent';
 
-import { Button, Container, Row, Col } from 'reactstrap';
+import { Button, Container, Row, Col, Input } from 'reactstrap';
 import Select from 'react-select';
 import Axios from 'axios';
 
@@ -125,7 +126,7 @@ class Signup extends Component {
         alert('User Registered successfully');
       }
       else {
-        alert('Password not match');
+        this.setState({ confirmPasswordErr: false })
       }
     }
     else {
@@ -174,10 +175,10 @@ class Signup extends Component {
     const { name, number, email, password, confirmPassword, address, dob, age } = this.state.signup;
     return (
       <div>
-        <Container style={signup}>
+        <Container id='sign'>
           <Row>
             <Col>
-              <h1 style={{ color: 'darkBlue' }}>
+              <h1>
                 <u> Registration Form</u>
               </h1>
             </Col>
@@ -197,7 +198,7 @@ class Signup extends Component {
                 onBlur={(e) => this.isValidation(e.target.name, e.target.value)}
                 onChange={(e) => this.onChange(e.target.name, e.target.value)}
               />
-              {this.state.error.name ? <div><span style={error}>{this.state.error.name}</span></div> : null}
+              {this.state.error.name ? <div id='error'>{this.state.error.name}</div> : null}
             </Col>
           </Row>
 
@@ -215,7 +216,7 @@ class Signup extends Component {
                 onBlur={(e) => this.isValidation(e.target.name, e.target.value)}
                 onChange={(e) => this.onChange(e.target.name, e.target.value)}
               />
-              {this.state.error.number ? <div><span style={error}>{this.state.error.number}</span></div> : null}
+              {this.state.error.number ? <div id='error'>{this.state.error.number} </div> : null}
             </Col>
           </Row>
           <Row>
@@ -224,7 +225,7 @@ class Signup extends Component {
           </Row>
           <Row >
             <Col>
-              <InputComponent
+              <Input
                 type="date"
                 className="signup"
                 name="dob"
@@ -232,12 +233,15 @@ class Signup extends Component {
                 onBlur={(e) => this.getAge(e.target.value)}
                 onChange={(e) => this.onChange(e.target.name, e.target.value)}
               />
-              {this.state.error.dob ? <div><span style={error}>{this.state.error.dob}</span></div> : null}
+              {this.state.error.dob ? <div id='error'>{this.state.error.dob}</div> : null}
             </Col>
             <Col>
-              <InputComponent
+              <Input
+                type="text"
+                name="age"
                 value={age}
                 placeholder="Enter date of birth to view your age"
+                onChange={() => this.onChange()}
               />
             </Col>
           </Row>
@@ -275,7 +279,8 @@ class Signup extends Component {
 
           <hr />
           <Row>
-            <Col>Email id</Col></Row>
+            <Col>Email id</Col>
+          </Row>
           <Row>
             <Col>
               <InputComponent
@@ -287,7 +292,7 @@ class Signup extends Component {
                 onBlur={(e) => this.isValidation(e.target.name, e.target.value)}
                 onChange={(e) => this.onChange(e.target.name, e.target.value)}
               />
-              {this.state.error.email ? <div><span style={error}>{this.state.error.email}</span></div> : null}
+              {this.state.error.email ? <div id='error'>{this.state.error.email}</div> : null}
             </Col>
           </Row>
 
@@ -306,7 +311,7 @@ class Signup extends Component {
                 onBlur={(e) => this.isValidation(e.target.name, e.target.value)}
                 onChange={(e) => this.onChange(e.target.name, e.target.value)}
               />
-              {this.state.error.password ? <div><span style={error}>{this.state.error.password}</span></div> : null}
+              {this.state.error.password ? <div id='error'>{this.state.error.password}</div> : null}
             </Col>
             <Col>
               <InputComponent
@@ -317,7 +322,7 @@ class Signup extends Component {
                 value={confirmPassword}
                 onBlur={(e) => this.passwordCheck(e)}
                 onChange={(e) => this.onChange(e.target.name, e.target.value)}
-              />{this.state.confirmPasswordErr === false ? <div><span style={error}>Password and confirm Password must match</span></div> : null}
+              />{this.state.confirmPasswordErr === false ? <div id='error'>Password and confirm Password must match</div> : null}
             </Col>
           </Row>
           <hr />
@@ -331,13 +336,13 @@ class Signup extends Component {
                 radio={this.state.radio}
                 onBlur={(e) => this.isValidation(e.target.name, e.target.value)}
                 onChange={e => this.onChange(e.target.name, e.target.value)}
-              /> {this.state.error.gender ? <div><span style={error}>{this.state.error.gender}</span></div> : null}
+              /> {this.state.error.gender ? <div id='error'>{this.state.error.gender}</div> : null}
             </Col>
             <Col>
               <CheckboxComponent
                 checkbox={this.state.checkbox}
                 onChange={e => this.onChangeHobbies(e)}
-              />{this.state.error.hobbies ? <div><span style={error}>{this.state.error.hobbies}</span></div> : null}
+              />{this.state.error.hobbies ? <div id='error'>{this.state.error.hobbies}</div> : null}
             </Col>
           </Row>
           <hr />

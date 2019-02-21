@@ -14,7 +14,7 @@ class InputComponent extends Component {
           value={this.props.value}
           placeholder={this.props.placeholder}
           onBlur={this.props.onBlur}
-          onChange={() => this.props.onChange}
+          onChange={this.props.onChange}
         />
       </div>
     );
