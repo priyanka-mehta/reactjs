@@ -57,27 +57,46 @@ class UserList extends Component {
     return (
       <div className='App'>
         <hr />
-        Search :
-        <input
-          type='search'
-          name='search'
-          value={this.state.searchResult}
-          onChange={e => this.setValue(e)}
-          onBlur={() => this.searchRecord()}
-        />
+        <div className='heading'>
+          <div className='add'>
+            <NavLink exact to='/add' className='link'><span>&#8853;</span></NavLink>
+          </div>
+          <div className='search'>
+            Search :
+          <input
+              type='search'
+              name='search'
+              value={this.state.searchResult}
+              onChange={e => this.setValue(e)}
+              onBlur={() => this.searchRecord()}
+            />
+          </div>
+        </div>
         <hr />
         {this.state.loading ? <b>Loading...</b> : null}
+        <div className='mainTable bottomBorder leftBorder rightBorder'>
+          <div className='headingBottom leftBorder topBorder headerData'>
+            <div className='tableData rightBorder'>First Name</div>
+            <div className='tableData rightBorder '>Last Name</div>
+            <div className='tableData rightBorder '>Email</div>
+            <div className='tableData rightBorder'>Age</div>
+            <div className='tableData rightBorder'>Mobile</div>
+            <div className='tableData'>Edit/Delete</div>
+          </div>
+        </div>
         {this.state.userList.map((u, i) => {
-          return <div key={i}>
-            First Name : {u.fname}<br />
-            Last Name : {u.lname}<br />
-            Email : {u.email}<br />
-            Age : {u.age} <br />
-            Mobile : {u.mobile}<br />
-            <NavLink to={`/edit/${u.id}`} className='link1'>Edit</NavLink><br />
-            <NavLink to={`/delete/${u.id}`} onClick={() => this.deleteRecord(u.id)} className='link1'>Delete</NavLink>
-            <hr />
-            <hr />
+          return <div key={i} className='mainTable'>
+            <div className='topBorder'>
+              <div className='tableData rightBorder leftBorder'> {u.fname}</div>
+              <div className='tableData rightBorder'>  {u.lname}</div>
+              <div className='tableData rightBorder'> {u.email}</div>
+              <div className='tableData rightBorder'> {u.age}</div>
+              <div className='tableData rightBorder'> {u.mobile}</div>
+              <div className='tableData rightBorder'>
+                <NavLink to={`/edit/${u.id}`} className='link'>Edit</NavLink>/
+              <NavLink to={`/delete/${u.id}`} onClick={() => this.deleteRecord(u.id)} className='link'>Delete</NavLink>
+              </div>
+            </div>
           </div>
         })}
       </div>
