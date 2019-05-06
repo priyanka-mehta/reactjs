@@ -3,6 +3,8 @@ import { Route, NavLink, Switch, BrowserRouter as Router } from 'react-router-do
 import ArrayShift from './Component/ArrayShift';
 import Reactselect from './Component/Reactselect';
 import Home from './Component/Home';
+import Context from './Component/Context';
+import Hooks from './Component/Hooks';
 
 class App extends Component {
   render() {
@@ -19,11 +21,19 @@ class App extends Component {
             <div id="col-10">
               <NavLink activeClassName="active" to="/react-select">React-Select</NavLink>
             </div>
+            <div id="col-10">
+              <NavLink activeClassName="active" to="/context">Context</NavLink>
+            </div>
+            <div id="col-10">
+              <NavLink activeClassName="active" to="/hooks">Hooks</NavLink>
+            </div>
           </div>
           <Switch>
             <Route exact path="/" component={Home} />
             <Route exact path="/arrayshift" component={ArrayShift} />
             <Route exact path="/react-select" component={Reactselect} />
+            <Route exact path="/context" component={Context} />
+            <Route exact path="/hooks" component={Hooks} />
           </Switch>
         </div>
       </Router>
