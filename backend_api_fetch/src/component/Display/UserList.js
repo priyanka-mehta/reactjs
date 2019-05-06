@@ -54,6 +54,7 @@ class UserList extends Component {
   }
 
   render() {
+    const {searchResult,userList,loading}=this.state;
     return (
       <div className='App'>
         <hr />
@@ -66,14 +67,14 @@ class UserList extends Component {
           <input
               type='search'
               name='search'
-              value={this.state.searchResult}
+              value={searchResult}
               onChange={e => this.setValue(e)}
               onBlur={() => this.searchRecord()}
             />
           </div>
         </div>
         <hr />
-        {this.state.loading ? <b>Loading...</b> : null}
+        {loading ? <b>Loading...</b> : null}
         <div className='mainTable bottomBorder leftBorder rightBorder'>
           <div className='headingBottom leftBorder topBorder headerData'>
             <div className='tableData rightBorder'>First Name</div>
@@ -84,7 +85,7 @@ class UserList extends Component {
             <div className='tableData'>Edit/Delete</div>
           </div>
         </div>
-        {this.state.userList.map((u, i) => {
+        {userList.map((u, i) => {
           return <div key={i} className='mainTable'>
             <div className='topBorder'>
               <div className='tableData rightBorder leftBorder'> {u.fname}</div>

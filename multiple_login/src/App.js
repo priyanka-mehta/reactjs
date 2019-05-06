@@ -3,14 +3,13 @@ import Signup from './component/body/Signup';
 import Signin from './component/body/Signin';
 import './App.css';
 
-
 class App extends Component {
   constructor(props) {
     super(props);
     this.state = {
       signup: {
         fname: '',
-        lname : '',
+        lname: '',
         email: '',
         password: ''
       },
@@ -64,9 +63,10 @@ class App extends Component {
     return valid;
 
   }
-  onChange(e) {
-    const obj = { ...this.state[e.target.className], [e.target.name]: e.target.value };
-    this.setState({ [e.target.className]: obj });
+  onChange(obj, key, val) {
+    const category = { ...this.state[obj] };
+    category[key] = val;
+    this.setState({ [obj]: category });
   }
 
   render() {

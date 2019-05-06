@@ -13,7 +13,7 @@ class Signup extends Component {
                         name="fname"
                         placeholder="Enter First Name"
                         value={this.props.value}
-                        onChange={e => this.props.setValue(e)}
+                        onChange={e => this.props.setValue('signup','fname',e.target.value)}
                     />
                 </p>
                 <p>
@@ -23,7 +23,7 @@ class Signup extends Component {
                         name="lname"
                         placeholder="Enter Last Name"
                         value={this.props.value}
-                        onChange={e => this.props.setValue(e)}
+                        onChange={e => this.props.setValue('signup','lname',e.target.value)}
                     />
                 </p>
                 <p>
@@ -33,7 +33,7 @@ class Signup extends Component {
                         name="email"
                         placeholder="Enter Email"
                         value={this.props.value}
-                        onChange={e => this.props.setValue(e)}
+                        onChange={e => this.props.setValue('signup','email',e.target.value)}
                     />
                 </p>
                 <p>
@@ -43,7 +43,7 @@ class Signup extends Component {
                         name="password"
                         placeholder="Enter Password"
                         value={this.props.value}
-                        onChange={e => this.props.setValue(e)}
+                        onChange={e => this.props.setValue('signup','password',e.target.value)}
                     />  
                 </p>
                 <p>

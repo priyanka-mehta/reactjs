@@ -74,7 +74,7 @@ class Addedit extends Component {
     return (
       <>
         {this.props.match.path === '/add' ? <b className='form'>Add user</b> : <b className='form'> Edit user</b>}
-        <div className='form'>
+        <div className='form'> 
           <p> Name : </p>
           <p>
             <input

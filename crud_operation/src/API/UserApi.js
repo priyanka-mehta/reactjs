@@ -6,7 +6,7 @@ export const fetchUserList = (id) => {
   const apiurl = `users?page=${id}`;
   let fullUrl = `${baseUrl}${apiurl}`;
   return interceptor.posts(fullUrl).get();
-};
+}; 
 
 export const getUser = (id) => {
   const apiurl = `users/${id}`;
