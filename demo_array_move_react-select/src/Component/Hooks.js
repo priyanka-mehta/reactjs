@@ -29,7 +29,7 @@
 // }
 
 // export default Hooks;
-
+//-----------------------------------------------------------------------------------
 // import React, { useState, useEffect } from 'react';
 
 // function Hooks() {
@@ -49,7 +49,7 @@
 //   );
 // }
 // export default Hooks;
-
+// --------------------------------------------------------------------------
 import React from 'react';
 class Hooks extends React.Component {
   constructor(props) {
@@ -71,7 +71,7 @@ class Hooks extends React.Component {
 
   render() {
     return (
-      <div>
+      <div className='Main'>
         <p>You clicked {this.state.count} times</p>
         <button onClick={() => this.setState({ count: this.state.count + 1 })}>
           Click me
@@ -81,3 +81,4 @@ class Hooks extends React.Component {
   }
 }
 export default Hooks;
+//--------------------------------------------------------------------

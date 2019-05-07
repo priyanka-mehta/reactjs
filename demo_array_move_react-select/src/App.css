@@ -1,44 +1,72 @@
-.wrapper{
-  font-family: 'Times New Roman', Times, serif;
-  border:2px black;
-}
-.select{
-  width: 50%;
-  margin-left: 25%;
-  margin-right: 20%;
-}
-.radio{
-  text-align: center;
-}
-.input{
-  margin-left: 50px;
-}
-.selected-data{
-  border:2px ridge;
-  margin-left: 25%;
-  margin-right: 25%;
-  border-radius: 5px;
-}
-#left{
-  margin-left: 10%;
-  margin-top: 2%;
-  float:left;
-  width:30%;
-  height:400px;
-  border: 3px solid black;
-  text-align: center;
- 
-}
-#right{
-  margin-right: 10%;
-  margin-top: 2%;
-  float:right;
-  width:30%;
-  height:400px;
-  border: 3px solid black;
-  text-align: center;
+/* -------React-select-------- */
+
+.wrapper {
+    border: 2px black;
 }
 
-.Main{
-  font-family: 'Times New Roman', Times, serif;
+.radio {
+    text-align: center;
+}
+
+.input {
+    margin-left: 50px;
+}
+
+.select {
+    width: 50%;
+    margin-left: 25%;
+    margin-right: 20%;
+}
+
+.selected-data {
+    border: 2px ridge;
+    margin-left: 25%;
+    margin-right: 25%;
+    border-radius: 5px;
+}
+
+
+/* -------Array-shift-------- */
+
+.left {
+    margin-left: 10%;
+    margin-top: 2%;
+    float: left;
+    width: 30%;
+    height: 400px;
+    border: 3px solid black;
+    text-align: center;
+}
+
+.right {
+    margin-right: 10%;
+    margin-top: 2%;
+    float: right;
+    width: 30%;
+    height: 400px;
+    border: 3px solid black;
+    text-align: center;
+}
+
+
+/* -------Routing(App.js)-------- */
+
+.Main {
+    font-family: 'Times New Roman', Times, serif;
+}
+
+.Header {
+    background: white;
+    text-align: center;
+}
+
+.active {
+    color: red;
+}
+
+#col-10 {
+    padding: 1%;
+    display: inline-block;
+    color: black;
+    font-size: 23px;
 }

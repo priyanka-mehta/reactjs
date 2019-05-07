@@ -1,51 +1,58 @@
-import React from 'react';
+import React, { Component } from 'react';
 
-// class Context extends React.Component {
-//   render() {
-//     return <Toolbar theme="light" />;
-//   }
-// }
-// function Toolbar(props) {
-//   return (
-//     <div>
-//       <ThemedButton theme={props.theme} />
-//     </div>
-//   )
-// }
+// //First we will create a context
+const MyContext = React.createContext();
 
-// class ThemedButton extends React.Component {
-//   render() {
-//     console.log(this.props.theme);
-//     return <button theme={this.props.theme} >Click me</button>
-//   }
-// }
-
-// 
-
-const ThemeContext = React.createContext('light');
-
-class Context extends React.Component {
+//then create a provider component
+class MyProvider extends Component {
+  state = {
+    name: 'Priyanka',
+    age: '22',
+    cool: false,
+  }
   render() {
     return (
-      <ThemeContext.Provider value="dark">
-        <Toolbar />
-      </ThemeContext.Provider>
-    );
+      <MyContext.Provider value={this.state.name}>
+        {this.props.children}
+      </MyContext.Provider>
+    )
   }
 }
 
-function Toolbar(props) {
-  return (
-    <div>
-      <ThemedButton />
-    </div>
-  );
-}
+const Family = () => (
+  <center>
+    <Person />
+  </center>
+)
+class Person extends Component {
 
-class ThemedButton extends React.Component {
-  static contextType = ThemeContext;
   render() {
-    return <input type='button' className='btn btn-primary' value='Click me' theme={this.context} />;
+    return (
+      <center>
+        <MyContext.Consumer>
+          {(context) => (
+            <>
+              <p>Name : {context.name}</p>
+              <p>Age : {context.age}</p>
+            </>
+          )}
+        </MyContext.Consumer>
+      </center>
+    )
   }
 }
+
+class Context extends Component {
+  render() {
+    return (
+      <MyProvider>
+        <center className='Main'>
+          <p>I'm in Context</p>
+          <Family />
+        </center>
+      </MyProvider>
+    )
+  }
+}
+
 export default Context;

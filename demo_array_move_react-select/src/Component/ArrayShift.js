@@ -99,7 +99,7 @@ class ArrayShift extends Component {
     return (
       <div >
         <center>
-          <table border='2' id='left'>
+          <table border='2' className='left'>
             <tbody>
               {subjectList.map((i) =>
                 <tr key={i.id}>
@@ -113,7 +113,7 @@ class ArrayShift extends Component {
             Add
           </button>
 
-          <table border='2' id='right'>
+          <table border='2' className='right'>
             <tbody>
               {selectedSubject.map((i) =>
                 <tr key={i.id}>
