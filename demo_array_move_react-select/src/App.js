@@ -5,13 +5,15 @@ import Reactselect from './Component/Reactselect';
 import Home from './Component/Home';
 import Context from './Component/Context';
 import Hooks from './Component/Hooks';
+import InputFormat from './Component/InputFormat';
 
 const url = [
   { to: '/', page: 'Home' },
   { to: '/arrayshift', page: 'Array Shift' },
   { to: '/react-select', page: 'React - Select' },
   { to: '/context', page: 'Context' },
-  { to: '/hooks', page: 'Hooks' }
+  { to: '/hooks', page: 'Hooks' },
+  { to: '/input-format', page: 'Input-Format' }
 ]
 
 class App extends Component {
@@ -33,6 +35,7 @@ class App extends Component {
           <Route exact path="/react-select" component={Reactselect} />
           <Route exact path="/context" component={Context} />
           <Route exact path="/hooks" component={Hooks} />
+          <Route exact path="/input-format" component={InputFormat} />
         </Switch>
 
       </div>

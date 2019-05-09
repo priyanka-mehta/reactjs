@@ -19,7 +19,7 @@
 }
 
 .selected-data {
-    border: 2px ridge;
+    /* border: 2px ridge; */
     margin-left: 25%;
     margin-right: 25%;
     border-radius: 5px;
@@ -69,4 +69,11 @@
     display: inline-block;
     color: black;
     font-size: 23px;
+}
+/* ----------Input-Format----------- */
+.input-format{
+    width: 200px;
+    margin-left: 40%;
+    margin-right: 20%;
+    margin-top: 25px;
 }

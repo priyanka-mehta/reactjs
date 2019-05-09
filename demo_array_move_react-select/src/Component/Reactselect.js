@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import Select from 'react-select';
-import { FaRegTimesCircle } from 'react-icons/fa';
+import { FaRegTimesCircle, FaArrowRight, FaDotCircle } from 'react-icons/fa';
 
 import './../App.css'
 
@@ -82,7 +82,7 @@ class Reactselect extends Component {
                 <div >
                   {selectedOption.map((i, key) =>
                     <div key={key} className='selected-data'>
-                      {i.label}
+                      <FaArrowRight /> {i.label}
                       <FaRegTimesCircle onClick={() => this.removeSelected(i)} />
                     </div>
                   )}
@@ -96,7 +96,7 @@ class Reactselect extends Component {
               {selectedOption.label
                 ?
                 <div className='selected-data'>
-                  {selectedOption.label}
+                  <FaArrowRight /> {selectedOption.label}
                   <span> <FaRegTimesCircle onClick={() => this.removeSelected(selectedOption)} /></span>
                 </div>
                 :
