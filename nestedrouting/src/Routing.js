@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Route, Switch, Router } from 'react-router-dom';
+import { Route, Switch, BrowserRouter as Router } from 'react-router-dom';
 import Header from './component/Header';
 import Home from './component/Home';
 import MCA from './component/MCA/MCA';
@@ -12,7 +12,6 @@ class Routing extends Component {
       <Router>
         <div>
           <Header />
-
           <div>
             <Switch>
               <Route exact path="/" component={Home} />

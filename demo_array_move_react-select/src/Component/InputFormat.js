@@ -32,7 +32,7 @@ class InputFormat extends Component {
     return (
       <center className='input-format'>
         <Input
-          placeholder='Enter number'
+          placeholder='Enter contact number'
           value={this.state.number}
           onChange={(e) => this.handleChange(e.target.value)}
         />
