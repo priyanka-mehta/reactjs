@@ -6,6 +6,7 @@ import Home from './Component/Home';
 import Context from './Component/Context';
 import Hooks from './Component/Hooks';
 import InputFormat from './Component/InputFormat';
+import ArrayIndex from './Component/ArrayIndex';
 
 const url = [
   { to: '/', page: 'Home' },
@@ -13,7 +14,8 @@ const url = [
   { to: '/react-select', page: 'React - Select' },
   { to: '/context', page: 'Context' },
   { to: '/hooks', page: 'Hooks' },
-  { to: '/input-format', page: 'Input-Format' }
+  { to: '/input-format', page: 'Input-Format' },
+  { to: '/array-index', page: 'Array-Index' }
 ]
 
 class App extends Component {
@@ -36,6 +38,7 @@ class App extends Component {
           <Route exact path="/context" component={Context} />
           <Route exact path="/hooks" component={Hooks} />
           <Route exact path="/input-format" component={InputFormat} />
+          <Route exact path="/array-index" component={ArrayIndex} />
         </Switch>
 
       </div>

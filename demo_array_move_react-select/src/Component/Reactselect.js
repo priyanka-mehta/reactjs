@@ -71,6 +71,17 @@ class Reactselect extends Component {
             value={selectedOption}
             onChange={this.handleChange}
             options={options}
+            styles={{
+              control: (base, state) => ({
+                ...base,
+                boxShadow: state.isFocused ? '#f47434' : 0,
+                border: state.isFocused ? '1px solid #f47434' : '1px solid #ced4da',
+                outline: 'none',
+                '&:hover': {
+                  border: state.isSelected ? '1px solid #f47434' : ''
+                }
+              }),
+            }}
           />
           <br />
         </div>
