@@ -1,6 +1,18 @@
 import React, { Component } from 'react';
-import Select from 'react-select';
-import { FaRegTimesCircle, FaArrowRight } from 'react-icons/fa';
+import Select, { components } from 'react-select';
+import {
+  FaRegTimesCircle,
+  FaArrowRight,
+  FaPizzaSlice,
+  FaFacebookMessenger,
+  FaFacebook,
+  FaWhatsapp,
+  FaSkype,
+  FaTwitter,
+  FaCookie,
+  FaIceCream,
+  FaCheese
+} from 'react-icons/fa';
 
 import './../App.css'
 
@@ -15,23 +27,52 @@ const options = [
   { value: 'c++', label: 'C++' }
 ];
 
+const statusOptions = [
+  { value: "pizza", label: `Pizza`, icon: <FaPizzaSlice /> },
+  { value: "cookie", label: `Cookie`, icon: <FaCookie /> },
+  { value: "icecream", label: "Ice-cream", icon: <FaIceCream /> },
+  { value: "cheese", label: "Cheese", icon: <FaCheese /> },
+  { value: "facebook", label: "Facebook", icon: <FaFacebook /> },
+  { value: "messanger", label: "Facebook Messenger", icon: <FaFacebookMessenger /> },
+  { value: "whatsapp", label: "WhatsApp", icon: <FaWhatsapp /> },
+  { value: "skype", label: "Skype", icon: <FaSkype /> },
+  { value: "twitter", label: "Twitter", icon: <FaTwitter /> },
+];
+
+const customSingleValue = ({ data }) => (
+  <div>
+    {data.icon && <span>{data.icon}</span>}
+    <span>{data.label}</span>
+  </div>
+);
+
+const { Option } = components;
+const IconOption = (props) => (
+  <Option {...props}>
+    {props.data.icon}&nbsp;
+    {props.data.label}
+  </Option>
+);
+
 class Reactselect extends Component {
   constructor(props) {
     super(props);
     this.state = {
       selectedOption: [],
       multi: false,
+      selectedIconOption: []
     }
   }
 
   handleChange = (selectedOption) => {
     this.setState({ selectedOption })
   }
-
+  handleSelectedChange = (selectedOption) => {
+    this.setState({ selectedIconOption: selectedOption })
+  }
   onClick(value) {
     this.setState({ multi: value, selectedOption: [] })
   }
-
   removeSelected(selected) {
     if (this.state.multi === true) {
       const selectedOption = [...this.state.selectedOption];
@@ -83,6 +124,13 @@ class Reactselect extends Component {
               }),
             }}
           />
+
+          <Select
+            options={statusOptions}
+            onChange={this.handleSelectedChange}
+            components={{ SingleValue: customSingleValue, Option: IconOption }}
+          />
+
           <br />
         </div>
         <div>

@@ -5,9 +5,10 @@ import '../App';
 const subHeading = {
   padding: "20px",
   color: "gray",
-  "text-align": "center",
-  "font-size": "30px",
-  margin: "20px"
+  margin: "20px",
+  "textAlign": "center",
+  "fonSize": "30px",
+
 };
 
 class Home extends Component {
@@ -29,9 +30,9 @@ class Home extends Component {
         </div>
 
         <div>
-          <div class="oneline">{this.person("Student", "100")}</div>
-          <div class="oneline">{this.person("Faculty", "12")}</div>
-          <div class="oneline">{this.person("Classrooms", "8")}</div>
+          <div className="oneline">{this.person("Student", "100")}</div>
+          <div className="oneline">{this.person("Faculty", "12")}</div>
+          <div className="oneline">{this.person("Classrooms", "8")}</div>
         </div>
       </div>
     );

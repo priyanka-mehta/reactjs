@@ -83,7 +83,7 @@ class Login extends Component {
                                 />
                             </p>
                             {isValidPassword ? null : <div><span style={{ color: 'red', fontFamily: 'Times New Roman' }}>Please enter Strong Password.</span><br /></div>}<br />
-                            <button onClick={a => this.onClick()}>LogIn</button>
+                            <button onClick={() => this.onClick()}>LogIn</button>
                         </div>
                     </center>
                 </div>
