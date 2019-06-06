@@ -13,7 +13,6 @@ import {
   FaIceCream,
   FaCheese
 } from 'react-icons/fa';
-
 import './../App.css'
 
 const options = [
@@ -41,6 +40,7 @@ const statusOptions = [
 
 const customSingleValue = ({ data }) => (
   <div>
+    {console.log(data)}
     {data.icon && <span>{data.icon}</span>}
     <span>{data.label}</span>
   </div>
