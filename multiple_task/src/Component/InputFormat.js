@@ -42,4 +42,3 @@ class InputFormat extends Component {
 }
 
 export default InputFormat;
-

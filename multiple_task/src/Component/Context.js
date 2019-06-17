@@ -25,7 +25,6 @@ const Family = () => (
   </center>
 )
 class Person extends Component {
-
   render() {
     return (
       <center>

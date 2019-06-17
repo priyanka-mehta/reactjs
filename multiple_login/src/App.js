@@ -44,7 +44,7 @@ class App extends Component {
 
     if (this.validate()) {
       let array = this.state.user.concat(this.state.signup);
-      this.setState({ user: array });
+      this.setState({ user: array, signup: '' });
       alert('User Registered successfully');
     }
     else {

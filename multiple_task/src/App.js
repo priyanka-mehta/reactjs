@@ -7,6 +7,8 @@ import Context from './Component/Context';
 import Hooks from './Component/Hooks';
 import InputFormat from './Component/InputFormat';
 import ArrayIndex from './Component/ArrayIndex';
+import Parent from './Component/MoveDataOnChange/Parent';
+import FileUpload from './Component/FileUpload/FileUpload';
 
 const url = [
   { to: '/', page: 'Home' },
@@ -15,7 +17,9 @@ const url = [
   { to: '/context', page: 'Context' },
   { to: '/hooks', page: 'Hooks' },
   { to: '/input-format', page: 'Input-Format' },
-  { to: '/array-index', page: 'Array-Index' }
+  { to: '/array-index', page: 'Array-Index' },
+  { to: '/move-data-onchange', page: 'Move-data-onChange' },
+  { to: '/file-upload', page: 'File-Upload' }
 ]
 
 class App extends Component {
@@ -39,6 +43,8 @@ class App extends Component {
           <Route exact path="/hooks" component={Hooks} />
           <Route exact path="/input-format" component={InputFormat} />
           <Route exact path="/array-index" component={ArrayIndex} />
+          <Route exact path="/move-data-onchange" component={Parent} />
+          <Route exact path="/file-upload" component={FileUpload} />
         </Switch>
 
       </div>
